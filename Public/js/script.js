@@ -33,8 +33,8 @@ $(document).ready(function(){
         });
     }
 
-    $("#btn_subscribe").click(function(){
-        var $action = $('#subscribeform').attr('action');
+    $('#btn_subscribe').click(function(){
+        var $action = $('#form_subscription').attr('action');
         $.post($action,
         {
             email: $('#email').val()
@@ -46,8 +46,17 @@ $(document).ready(function(){
         });
     });
 
-    $("#btn_tell").click(function(){
-        alert("tell");
+    $('#btn_tell').click(function(){
+        var $action = $('#form_tell').attr('action');
+        $.post($action,
+        {
+            location: $('#location').val()
+        },
+        function(data)
+        {
+            alert(data['info']);
+            $('#location').val('');
+        });
     });
 
     $("#getIp").click(function(){

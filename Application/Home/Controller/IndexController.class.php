@@ -48,27 +48,58 @@ class IndexController extends Controller {
     public function subscribe()
     {
         $data = I('post.');
-
-        if(empty($data['email']))
+        $email = strtoupper($data['email']);
+        
+        if(empty($email))
         {
             $this->error('Your email address can not be empty!');
         }
 
         $subscription = M('Subscription', '', 'DB_CONFIG');
 
-        $duplicate_subscriber = $subscription->where("email = '%s'", $data['email'])->find();
+        $duplicate_subscriber = $subscription->where("email = '%s'", $email)->find();
         if($duplicate_subscriber)
         {
-            $user['status'] = 1;
-            $subscription->where("email = '%s'", $data['email'])->save($user);
+            $tuple['status'] = 1;
+            $subscription->where("email = '%s'", $email)->save($tuple);
         }
         else
         {
-            $user['email'] = $data['email'];
-            $user['status'] = 1;
-            $subscription->add($user);
+            $tuple['email'] = $email;
+            $tuple['status'] = 1;
+            $subscription->add($tuple);
         }
 
         $this->success('Subscription successful!', __APP__);
+    }
+
+    public function tell()
+    {
+        $data = I('post.');
+        $location = strtoupper($data['location']);
+
+        if(empty($location))
+        {
+            $this->error('Your destination can not be empty!');
+        }
+
+        $destination = M('Destination', '', 'DB_CONFIG');
+
+        $duplicate_location = $destination->where("location = '%s'", $location)->find();
+        if($duplicate_location)
+        {
+            $count = $destination->where("location = '%s'", $location)->getField('count');
+
+            $tuple['count'] = $count + 1;
+            $destination->where("location = '%s'", $location)->save($tuple);
+        }
+        else
+        {
+            $tuple['location'] = $location;
+            $tuple['count'] = 1;
+            $destination->add($tuple);
+        }
+
+        $this->success('Your destination has been registered successfully!');
     }
 }

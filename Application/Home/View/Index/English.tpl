@@ -73,8 +73,8 @@ Volunteer+Vacation,让身体和心灵同时在路上！</p>
                     <div class="tab">
                         <div class="box visible">
                             <h4><strong>Thailand, Africa, Niboer, YunNan...</strong></h4>
-                            <form action="">
-                                <input type="email" placeholder="Where to go?" class="input-text">
+                            <form id="form_tell" action="{:U('Home/Index/tell/')}">
+                                <input id="location" type="input-text" placeholder="Where to go?" class="input-text">
                                 <h5>Hotplaces: <strong>Thailand, Africa, Niboer, YunNan</strong></h5>
                                 <br/>
                                 <a id="btn_tell" href="#" class="button button-stripe">Tell us your perference</a>
@@ -91,7 +91,7 @@ Volunteer+Vacation,让身体和心灵同时在路上！</p>
                 <div class="wrap">
                     <div class="newsletter-title">Subscribe</div>
                     <div class="newsletter-form clearfix">
-                        <form id="subscribeform" action="{:U('Home/Index/subscribe/')}">
+                        <form id="form_subscription" action="{:U('Home/Index/subscribe/')}">
                             <input id="email" type="email" placeholder="Your email address" class="input-text">
                             <input id="btn_subscribe" type="button" class="button" value="Subscribe">
                         </form>
