@@ -44,4 +44,31 @@ class IndexController extends Controller {
         else
             $this->display('English');
     }
+
+    public function subscribe()
+    {
+        $data = I('post.');
+
+        if(empty($data['email']))
+        {
+            $this->error('Your email address can not be empty!');
+        }
+
+        $subscription = M('Subscription', '', 'DB_CONFIG');
+
+        $duplicate_subscriber = $subscription->where("email = '%s'", $data['email'])->find();
+        if($duplicate_subscriber)
+        {
+            $user['status'] = 1;
+            $subscription->where("email = '%s'", $data['email'])->save($user);
+        }
+        else
+        {
+            $user['email'] = $data['email'];
+            $user['status'] = 1;
+            $subscription->add($user);
+        }
+
+        $this->success('Subscription successful!', __APP__);
+    }
 }

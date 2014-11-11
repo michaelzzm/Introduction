@@ -91,8 +91,8 @@ Volunteer+Vacation,让身体和心灵同时在路上！</p>
                 <div class="wrap">
                     <div class="newsletter-title">Subscribe</div>
                     <div class="newsletter-form clearfix">
-                        <form action="">
-                            <input type="email" placeholder="Your email address" class="input-text">
+                        <form id="subscribeform" action="{:U('Home/Index/subscribe/')}">
+                            <input id="email" type="email" placeholder="Your email address" class="input-text">
                             <input id="btn_subscribe" type="button" class="button" value="Subscribe">
                         </form>
                     </div>

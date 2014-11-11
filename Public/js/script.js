@@ -34,7 +34,16 @@ $(document).ready(function(){
     }
 
     $("#btn_subscribe").click(function(){
-        alert("subscribe");
+        var $action = $('#subscribeform').attr('action');
+        $.post($action,
+        {
+            email: $('#email').val()
+        },
+        function(data)
+        {
+            alert(data['info']);
+            $('#email').val('');
+        });
     });
 
     $("#btn_tell").click(function(){
