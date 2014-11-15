@@ -12,6 +12,8 @@ class IndexController extends Controller {
         }else if(getenv("REMOTE_ADDR")){
         $ip = getenv("REMOTE_ADDR");
         }
+        //var_dump($_SERVER['HTTP_ACCEPT_LANGUAGE']); test for browser language
+
         // IP地址合法验证
         $ips = explode(',', $ip);
         $addr = $ips[0];
@@ -101,5 +103,13 @@ class IndexController extends Controller {
         }
 
         $this->success('Your destination has been registered successfully!');
+    }
+
+    public function en(){
+        $this->display('English');
+    }
+
+    public function zh(){
+        $this->display('Chinese');
     }
 }
