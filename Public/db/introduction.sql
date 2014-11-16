@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 16, 2014 at 02:59 AM
+-- Generation Time: Nov 16, 2014 at 12:42 PM
 -- Server version: 5.5.20
 -- PHP Version: 5.3.10
 
@@ -29,18 +29,21 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `destination`;
 CREATE TABLE IF NOT EXISTS `destination` (
   `location` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
   `count` int(11) NOT NULL,
   PRIMARY KEY (`location`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `destination`
+-- Table structure for table `destination_subscription`
 --
 
-INSERT INTO `destination` (`location`, `email`, `count`) VALUES
-('SHANGHAI', '', 1),
-('WUHAN', '', 2);
+DROP TABLE IF EXISTS `destination_subscription`;
+CREATE TABLE IF NOT EXISTS `destination_subscription` (
+  `location` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf16;
 
 -- --------------------------------------------------------
 
@@ -55,13 +58,6 @@ CREATE TABLE IF NOT EXISTS `subscription` (
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16;
-
---
--- Dumping data for table `subscription`
---
-
-INSERT INTO `subscription` (`email`, `status`, `create_time`) VALUES
-('RAINFOREST.VISTA@GMAIL.COM', 1, '2014-11-11 18:24:14');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
