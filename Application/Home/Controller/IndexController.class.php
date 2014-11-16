@@ -63,7 +63,7 @@ class IndexController extends Controller {
         {
             if($lang == 'zh')
             {
-                $errMsg = "你的邮箱地址不能为空!";
+                $errMsg = "你的邮箱不能为空！";
             }
             else
             {
@@ -90,7 +90,7 @@ class IndexController extends Controller {
 
         if($lang == 'zh')
         {
-            $sucMsg = '你已经成功订阅！';
+            $sucMsg = '你已经成功订阅我们的信息！';
         }
         else
         {
@@ -117,11 +117,11 @@ class IndexController extends Controller {
         {
             if($lang == 'zh')
             {
-                $errMsg = "你的目的地不能为空!";
+                $errMsg = "你的目的地不能为空";
             }
             else
             {
-                $errMsg = "Your destination can not be empty!";
+                $errMsg = "Your destination can not be empty";
             }
 
             $this->error($errMsg);

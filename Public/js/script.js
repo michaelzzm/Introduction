@@ -41,7 +41,20 @@ $(document).ready(function(){
             data: {email:$('#email').val(), lang:$('#form_subscription')[0].baseURI},
             dataType: 'json',
             success: function(data) {
-                alert(data['info']);
+                if(data['status'] != 1)
+                {
+                    $('#subscriptionnotice').removeClass('alert-success').addClass('alert-danger');
+                }
+                else
+                {
+                    $('#subscriptionnotice').removeClass('alert-danger').addClass('alert-success');
+                }
+
+                $('#subscriptionnotice').html(data['info']);
+                $('#subscriptionnotice').show();
+                
+                $('#modal_subscriptioninfo').modal('show');
+
                 $('#email').val('');
             }
         });
