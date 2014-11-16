@@ -73,13 +73,13 @@ Volunteer+Vacation,让身体和心灵同时在路上！</p>
             <!--</div>-->
             <!-- /.promo clearfix -->
             <!--/.comments-->
-            <div class="modal fade" id="modalTell" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal fade" id="modalTell" tabindex="-1" role="dialog" aria-labelledby="ModalTellLabel" aria-hidden="true">
               <div class="modal-dialog modal-sm">
                 <div class="modal-content">
                 <form id="form_tell" action="{:U('/tell')}">
                   <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Dear, Your Email?</h4>
+                    <h4 class="modal-title" id="ModalTellLabel">Dear, Your Email?</h4>
                   </div>
                   <div class="modal-body">
                     <div id="noticetell" style="display:none" class="alert" role="alert">
@@ -141,12 +141,12 @@ Volunteer+Vacation,让身体和心灵同时在路上！</p>
             <!-- /.newsletter clearfix -->
 
             <!-- Modal -->
-            <div class="modal fade" id="modal_subscription" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal fade" id="modal_subscription" tabindex="-1" role="dialog" aria-labelledby="ModalSubscriptionLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Dear User,</h4>
+                    <h4 class="modal-title" id="ModalSubscriptionLabel">Dear User,</h4>
                   </div>
                   <div class="modal-body">
                     <div id="subscriptionnotice" style="display:none" class="alert" role="alert"></div>

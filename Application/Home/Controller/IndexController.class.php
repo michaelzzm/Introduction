@@ -158,18 +158,18 @@ class IndexController extends Controller {
             }
             else
             {
-                $sucMsg = 'We will inform you Voluncation related with '. $location. 'at the first time!';
+                $sucMsg = 'We will inform you Voluncation related with '. $location. ' at the first time!';
             }
         }
         else
         {
             if($lang == 'zh')
             {
-                $sucMsg = '旅心已记住你的目的地:'. $location. '。快快订阅我们第一时间收取信息吧！';
+                $sucMsg = '旅心已记住你的目的地: '. $location. '。 快快订阅我们第一时间收取信息吧！';
             }
             else
             {
-                $sucMsg = 'Voluncation writes down your desitination:'. $location. 'Please subscribe to get the up-to-date info!';
+                $sucMsg = 'Voluncation writes down your desitination: '. $location. '</br>' . 'Please subscribe to get the up-to-date info!';
             }
         }
 

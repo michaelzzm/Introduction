@@ -69,7 +69,7 @@ $(document).ready(function(){
         $.ajax({
             type: 'POST',
             url: action,
-            data: {location:$('#location').val(), email:$('#modal_email').val(), lang:$('#form_tell')[0].baseURI},
+            data: {location:$('#modal_location').val(), email:$('#modal_email').val(), lang:$('#form_tell')[0].baseURI},
             dataType: 'json',
             success: function(data) {
                  if(data['status'] != 1)
@@ -87,12 +87,26 @@ $(document).ready(function(){
                 $('#location').val('');
             }
         });
+
+        // UI update
+        $('#ModalTellLabel').html('Dear User,');
+        $('#modal_location').hide();
+        $('#modal_email').hide();
+        $('#btn_tell').hide();
     });
 
     $('#modalTell').on('hidden.bs.modal', function(e) {
+        $('#ModalTellLabel').html('Dear, Your Email?');
+
         $('#noticetell').hide();
+
         $('#modal_location').val('');
+        $('#modal_location').show();
+
         $('#modal_email').val('');
+        $('#modal_email').show();
+
+        $('#btn_tell').show();
     });
 
     $("#getIp").click(function(){
