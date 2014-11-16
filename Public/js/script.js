@@ -52,7 +52,7 @@ $(document).ready(function(){
         $.ajax({
             type: 'POST',
             url: action,
-            data: {location:$('#location').val(), lang:$('#form_tell')[0].baseURI},
+            data: {location:$('#location').val(), email:$('#modal_email').val(), lang:$('#form_tell')[0].baseURI},
             dataType: 'json',
             success: function(data) {
                 alert(data['info']);

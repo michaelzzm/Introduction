@@ -86,7 +86,7 @@ Volunteer+Vacation,让身体和心灵同时在路上！</p>
                     </div> 
                     <div class="form-group">
                       <label for="curpas">We'll inform you Voluncation related with <span style="color:#5bc0de" id="user_location"></span> at the first time</label>
-                      <input type="text" class="form-control" id="curpas" placeholder="Your Email" value="">
+                      <input id="modal_email" type="text" class="form-control" id="curpas" placeholder="Your Email" value="">
                     </div>
                   </div>
                   <div class="modal-footer">

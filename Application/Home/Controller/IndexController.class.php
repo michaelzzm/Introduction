@@ -104,6 +104,7 @@ class IndexController extends Controller {
     {
         $data = I('post.');
         $location = strtoupper($data['location']);
+        $email = strtoupper($data['email']);
 
         //language decision
         $lang = 'zh';
@@ -141,6 +142,15 @@ class IndexController extends Controller {
             $tuple['location'] = $location;
             $tuple['count'] = 1;
             $destination->add($tuple);
+        }
+
+        if(!empty($email))
+        {
+            $destination_subscription = M('DestinationSubscription', '', 'DB_CONFIG');
+
+            $tuple['location'] = $location;
+            $tuple['email'] = $email;
+            $destination_subscription->add($tuple);
         }
 
         if($lang == 'zh')
