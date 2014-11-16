@@ -50,11 +50,27 @@ class IndexController extends Controller {
     public function subscribe()
     {
         $data = I('post.');
-        $email = strtoupper($data['email']);
-        
-        if(empty($email))
+        $email = strtoupper(trim($data['email']));
+
+        //language decision
+        $lang = 'zh';
+        if(strpos($data[lang], 'en') > 0)
         {
-            $this->error('Your email address can not be empty!');
+            $lang = 'en';
+        }
+
+        if(!filter_var($email, FILTER_VALIDATE_EMAIL))
+        {
+            if($lang == 'zh')
+            {
+                $errMsg = '请输入正确的邮箱地址。';
+            }
+            else
+            {
+                $errMsg = "Please enter your email address.";
+            }
+
+            $this->error($errMsg);
         }
 
         $subscription = M('Subscription', '', 'DB_CONFIG');
@@ -72,26 +88,43 @@ class IndexController extends Controller {
             $subscription->add($tuple);
         }
 
-        $this->success('Subscription successful!', __APP__);
+        if($lang == 'zh')
+        {
+            $sucMsg = '你已经成功订阅我们的信息！';
+        }
+        else
+        {
+            $sucMsg = 'Your subscription is successful!';
+        }
+
+        $this->success($sucMsg, __APP__);
     }
 
     public function tell()
     {
         $data = I('post.');
-        $location = strtoupper($data['location']);
+        $location = strtoupper(trim($data['location']));
+        $email = strtoupper(trim($data['email']));
 
         //language decision
         $lang = 'zh';
-        $sucMsg = '旅心已记住你的目的地，快快订阅我们第一时间收取信息吧！';
-        if(strpos($data[lang],'en')>0)
+        if(strpos($data[lang], 'en') > 0)
         {
             $lang = 'en';
-            $sucMsg = 'Voluncation writes down your desitination, subscribe to get best matches!';
         }
         
-        /*if(empty($location))
+        if(empty($location))
         {
-            $this->error('Your destination can not be empty!');
+            if($lang == 'zh')
+            {
+                $errMsg = "你的目的地不能为空！";
+            }
+            else
+            {
+                $errMsg = "Your destination can not be empty!";
+            }
+
+            $this->error($errMsg);
         }
 
         $destination = M('Destination', '', 'DB_CONFIG');
@@ -109,7 +142,50 @@ class IndexController extends Controller {
             $tuple['location'] = $location;
             $tuple['count'] = 1;
             $destination->add($tuple);
-        }*/
+        }
+
+        if(!empty($email))
+        {
+            if(!filter_var($email, FILTER_VALIDATE_EMAIL))
+            {
+                if($lang == 'zh')
+                {
+                    $errMsg = '请输入正确的邮箱地址。';
+                }
+                else
+                {
+                    $errMsg = "Please enter your email address.";
+                }
+
+                $this->error($errMsg);
+            }
+
+            $destination_subscription = M('DestinationSubscription', '', 'DB_CONFIG');
+
+            $tuple['location'] = $location;
+            $tuple['email'] = $email;
+            $destination_subscription->add($tuple);
+
+            if($lang == 'zh')
+            {
+                $sucMsg = '我们会第一时间通知你'. $location. '相关的旅心哦!';
+            }
+            else
+            {
+                $sucMsg = 'We will inform you Voluncation related with '. $location. ' at the first time!';
+            }
+        }
+        else
+        {
+            if($lang == 'zh')
+            {
+                $sucMsg = '旅心已记住你的目的地: '. $location. '。 快快订阅我们第一时间收取信息吧！';
+            }
+            else
+            {
+                $sucMsg = 'Voluncation writes down your desitination: '. $location. '</br>' . 'Please subscribe to get the up-to-date info!';
+            }
+        }
 
         $this->success($sucMsg);
     }

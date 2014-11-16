@@ -34,48 +34,76 @@ $(document).ready(function(){
     }
 
     $('#btn_subscribe').click(function(){
-        var $action = $('#form_subscription').attr('action');
-        $.post($action,
-        {
-            email: $('#email').val()
-        },
-        function(data)
-        {
-            alert(data['info']);
-            $('#email').val('');
+        var action = $('#form_subscription').attr('action');
+        $.ajax({
+            type: 'POST',
+            url: action,
+            data: {email:$('#email').val(), lang:$('#form_subscription')[0].baseURI},
+            dataType: 'json',
+            success: function(data) {
+                if(data['status'] != 1)
+                {
+                    $('#subscriptionnotice').removeClass('alert-success').addClass('alert-danger');
+                }
+                else
+                {
+                    $('#subscriptionnotice').removeClass('alert-danger').addClass('alert-success');
+                }
+
+                $('#subscriptionnotice').html(data['info']);
+                $('#subscriptionnotice').show();
+
+                $('#modal_subscription').modal('show');
+
+                $('#email').val('');
+            }
         });
     });
 
-    /*$('#btn_tell').click(function(){
-        var $action = $('#form_tell').attr('action');
-        $.post($action,
-        {
-            location: $('#location').val()
-        },
-        function(data)
-        {
-            alert(data['info']);
-            $('#location').val('');
-        });
-    });*/
+    $('#modal_subscription').on('hidden.bs.modal', function(e) {
+        $('#subscriptionnotice').hide();
+    });
     
     $('#btn_tell').click(function(){
         var action = $('#form_tell').attr('action');
         $.ajax({
             type: 'POST',
             url: action,
-            data: {location:$('#location').val(), lang:$('#form_tell')[0].baseURI},
+            data: {location:$('#modal_location').val(), email:$('#modal_email').val(), lang:$('#form_tell')[0].baseURI},
             dataType: 'json',
             success: function(data) {
-                result = data;
-                if( 1 != result['status']) {
-                    alert('fail');
+                 if(data['status'] != 1)
+                {
+                    $('#noticetell').removeClass('alert-success').addClass('alert-danger');
                 }
-                else {
-                    alert(result['info']);
+                else
+                {
+                    $('#noticetell').removeClass('alert-danger').addClass('alert-success');
                 }
+
+                $('#noticetell').html(data['info']);
+                $('#noticetell').show();
+
+                $('#location').val('');
             }
         });
+
+        // UI update
+        $('#modal_location').hide();
+        $('#modal_email').hide();
+        $('#btn_tell').hide();
+    });
+
+    $('#modalTell').on('hidden.bs.modal', function(e) {
+        $('#noticetell').hide();
+
+        $('#modal_location').val('');
+        $('#modal_location').show();
+
+        $('#modal_email').val('');
+        $('#modal_email').show();
+
+        $('#btn_tell').show();
     });
 
     $("#getIp").click(function(){

@@ -73,20 +73,21 @@ Volunteer+Vacation,让身体和心灵同时在路上！</p>
             <!--</div>-->
             <!-- /.promo clearfix -->
             <!--/.comments-->
-            <div class="modal fade" id="modalTell" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal fade" id="modalTell" tabindex="-1" role="dialog" aria-labelledby="ModalTellLabel" aria-hidden="true">
               <div class="modal-dialog modal-sm">
                 <div class="modal-content">
                 <form id="form_tell" action="{:U('/tell')}">
                   <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Dear, Your Email?</h4>
+                    <h4 class="modal-title" id="ModalTellLabel">Dear, Your Email?</h4>
                   </div>
                   <div class="modal-body">
                     <div id="noticetell" style="display:none" class="alert" role="alert">
                     </div> 
                     <div class="form-group">
-                      <label for="curpas">We'll inform you Voluncation related with <span style="color:#5bc0de" id="user_location"></span> at the first time</label>
-                      <input type="text" class="form-control" id="curpas" placeholder="Your Email" value="">
+                      <input id="modal_location" type="text" class="form-control" id="curpas" placeholder="Your Destination" value="">
+                      <br/>
+                      <input id="modal_email" type="text" class="form-control" id="curpas" placeholder="Your Email(Optional)" value="">
                     </div>
                   </div>
                   <div class="modal-footer">
@@ -97,6 +98,8 @@ Volunteer+Vacation,让身体和心灵同时在路上！</p>
                 </form>
               </div>
             </div>
+
+
             <a name="favorite"></a>
             <div class="comments clearfix">
                 <div class="wrap">
@@ -110,7 +113,7 @@ Volunteer+Vacation,让身体和心灵同时在路上！</p>
                                 <a data-toggle="modal" data-target="#modalTell" href="#" class="button button-stripe"  onclick="changeUserLocation()">Tell us your perference</a>
                                 <script>
                                     function changeUserLocation() {
-                                        $("#user_location").text($("#location").val());
+                                        $("#modal_location").val($("#location").val().trim().toUpperCase()); 
                                     }
                                 </script>
                             </form>
@@ -126,7 +129,7 @@ Volunteer+Vacation,让身体和心灵同时在路上！</p>
                 <div class="wrap">
                     <div class="newsletter-title">Subscribe</div>
                     <div class="newsletter-form clearfix">
-                        <form id="form_subscription" action="{:U('Home/Index/subscribe/')}">
+                        <form id="form_subscription" action="{:U('/subscribe')}">
                             <input id="email" type="email" placeholder="Your email address" class="input-text">
                             <input id="btn_subscribe" type="button" class="button" value="Subscribe">
                         </form>
@@ -136,6 +139,25 @@ Volunteer+Vacation,让身体和心灵同时在路上！</p>
                 <!-- /.wrap -->
             </div>
             <!-- /.newsletter clearfix -->
+
+            <!-- Modal -->
+            <div class="modal fade" id="modal_subscription" tabindex="-1" role="dialog" aria-labelledby="ModalSubscriptionLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="ModalSubscriptionLabel">Dear User,</h4>
+                  </div>
+                  <div class="modal-body">
+                    <div id="subscriptionnotice" style="display:none" class="alert" role="alert"></div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
         </div>
         <!-- /.spanning-columns -->
     </div>
