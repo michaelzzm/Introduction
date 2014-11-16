@@ -52,12 +52,16 @@ $(document).ready(function(){
 
                 $('#subscriptionnotice').html(data['info']);
                 $('#subscriptionnotice').show();
-                
-                $('#modal_subscriptioninfo').modal('show');
+
+                $('#modal_subscription').modal('show');
 
                 $('#email').val('');
             }
         });
+    });
+
+    $('#modal_subscription').on('hidden.bs.modal', function(e) {
+        $('#subscriptionnotice').hide();
     });
     
     $('#btn_tell').click(function(){
@@ -68,10 +72,27 @@ $(document).ready(function(){
             data: {location:$('#location').val(), email:$('#modal_email').val(), lang:$('#form_tell')[0].baseURI},
             dataType: 'json',
             success: function(data) {
-                alert(data['info']);
+                 if(data['status'] != 1)
+                {
+                    $('#noticetell').removeClass('alert-success').addClass('alert-danger');
+                }
+                else
+                {
+                    $('#noticetell').removeClass('alert-danger').addClass('alert-success');
+                }
+
+                $('#noticetell').html(data['info']);
+                $('#noticetell').show();
+
                 $('#location').val('');
             }
         });
+    });
+
+    $('#modalTell').on('hidden.bs.modal', function(e) {
+        $('#noticetell').hide();
+        $('#modal_location').val('');
+        $('#modal_email').val('');
     });
 
     $("#getIp").click(function(){

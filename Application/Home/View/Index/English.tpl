@@ -85,7 +85,8 @@ Volunteer+Vacation,让身体和心灵同时在路上！</p>
                     <div id="noticetell" style="display:none" class="alert" role="alert">
                     </div> 
                     <div class="form-group">
-                      <label for="curpas">We'll inform you Voluncation related with <span style="color:#5bc0de" id="user_location"></span> at the first time</label>
+                      <input id="modal_location" type="text" class="form-control" id="curpas" placeholder="Your Destination" value="">
+                      <br/>
                       <input id="modal_email" type="text" class="form-control" id="curpas" placeholder="Your Email" value="">
                     </div>
                   </div>
@@ -112,7 +113,7 @@ Volunteer+Vacation,让身体和心灵同时在路上！</p>
                                 <a data-toggle="modal" data-target="#modalTell" href="#" class="button button-stripe"  onclick="changeUserLocation()">Tell us your perference</a>
                                 <script>
                                     function changeUserLocation() {
-                                        $("#user_location").text($("#location").val());
+                                        $("#modal_location").val($("#location").val().trim().toUpperCase()); 
                                     }
                                 </script>
                             </form>
@@ -140,7 +141,7 @@ Volunteer+Vacation,让身体和心灵同时在路上！</p>
             <!-- /.newsletter clearfix -->
 
             <!-- Modal -->
-            <div class="modal fade" id="modal_subscriptioninfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal fade" id="modal_subscription" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">

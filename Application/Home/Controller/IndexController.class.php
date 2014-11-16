@@ -50,7 +50,7 @@ class IndexController extends Controller {
     public function subscribe()
     {
         $data = I('post.');
-        $email = strtoupper($data['email']);
+        $email = strtoupper(trim($data['email']));
 
         //language decision
         $lang = 'zh';
@@ -103,8 +103,8 @@ class IndexController extends Controller {
     public function tell()
     {
         $data = I('post.');
-        $location = strtoupper($data['location']);
-        $email = strtoupper($data['email']);
+        $location = strtoupper(trim($data['location']));
+        $email = strtoupper(trim($data['email']));
 
         //language decision
         $lang = 'zh';
@@ -117,11 +117,11 @@ class IndexController extends Controller {
         {
             if($lang == 'zh')
             {
-                $errMsg = "你的目的地不能为空";
+                $errMsg = "你的目的地不能为空！";
             }
             else
             {
-                $errMsg = "Your destination can not be empty";
+                $errMsg = "Your destination can not be empty!";
             }
 
             $this->error($errMsg);
@@ -151,15 +151,26 @@ class IndexController extends Controller {
             $tuple['location'] = $location;
             $tuple['email'] = $email;
             $destination_subscription->add($tuple);
-        }
 
-        if($lang == 'zh')
-        {
-            $sucMsg = '旅心已记住你的目的地，快快订阅我们第一时间收取信息吧！';
+            if($lang == 'zh')
+            {
+                $sucMsg = '我们会第一时间通知你'. $location. '相关的旅心哦!';
+            }
+            else
+            {
+                $sucMsg = 'We will inform you Voluncation related with '. $location. 'at the first time!';
+            }
         }
         else
         {
-            $sucMsg = 'Voluncation writes down your desitination, subscribe to get best matches!';
+            if($lang == 'zh')
+            {
+                $sucMsg = '旅心已记住你的目的地:'. $location. '。快快订阅我们第一时间收取信息吧！';
+            }
+            else
+            {
+                $sucMsg = 'Voluncation writes down your desitination:'. $location. 'Please subscribe to get the up-to-date info!';
+            }
         }
 
         $this->success($sucMsg);
