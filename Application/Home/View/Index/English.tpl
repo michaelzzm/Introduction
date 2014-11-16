@@ -14,6 +14,7 @@
     <link rel="apple-touch-icon" sizes="144x144" href="touch/apple-touch-icon-144x144.png">
     <meta name="format-detection" content="telephone=no">
     <meta name="format-detection" content="address=no">
+    <load href="__PUBLIC__/css/bootstrap.min.css" />
     <load href="__PUBLIC__/css/style.css" />
     <!--[if lt IE 9]>
         <script src="js/html5.js"></script>
@@ -71,17 +72,47 @@ Volunteer+Vacation,让身体和心灵同时在路上！</p>
                  /.wrap -->
             <!--</div>-->
             <!-- /.promo clearfix -->
+            <!--/.comments-->
+            <div class="modal fade" id="modalTell" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                <form id="form_tell" action="{:U('/tell')}">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Dear, Your Email?</h4>
+                  </div>
+                  <div class="modal-body">
+                    <div id="noticetell" style="display:none" class="alert" role="alert">
+                    </div> 
+                    <div class="form-group">
+                      <label for="curpas">We'll inform you Voluncation related with <span style="color:#5bc0de" id="user_location"></span> at the first time</label>
+                      <input type="text" class="form-control" id="curpas" placeholder="Your Email" value="">
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" id="btn_tell" class="btn btn-primary">Submit</button>
+                  </div>
+                </div>
+                </form>
+              </div>
+            </div>
             <a name="favorite"></a>
             <div class="comments clearfix">
                 <div class="wrap">
                     <div class="tab">
                         <div class="box visible">
                             <h4><strong>Thailand, Africa, Niboer, YunNan...</strong></h4>
-                            <form id="form_tell" action="{:U('/tell')}">
+                            <form>
                                 <input id="location" type="text" placeholder="Where to go?" class="input-text">
                                 <h5>Hotplaces: <strong>Thailand, Africa, Niboer, YunNan</strong></h5>
                                 <br/>
-                                <a id="btn_tell" href="#" class="button button-stripe">Tell us your perference</a>
+                                <a data-toggle="modal" data-target="#modalTell" href="#" class="button button-stripe"  onclick="changeUserLocation()">Tell us your perference</a>
+                                <script>
+                                    function changeUserLocation() {
+                                        $("#user_location").text($("#location").val());
+                                    }
+                                </script>
                             </form>
                         </div>
                     </div>
