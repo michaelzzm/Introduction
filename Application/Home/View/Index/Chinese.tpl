@@ -78,8 +78,8 @@ Volunteer+Vacation,让身体和心灵同时在路上！</p>
                     <div class="tab">
                         <div class="box visible">
                             <h4><strong>云南，泰国，尼泊尔，非洲...</strong></h4>
-                            <form action="">
-                                <input type="email" placeholder="去哪里呢" class="input-text">
+                            <form id="form_tell" action="{:U('/tell')}">
+                                <input id="location" type="text" placeholder="去哪里呢" class="input-text" value="泰国">
                                 <h5>热门地点：<strong>云南，泰国，尼泊尔，非洲</strong></h5>
                                 <br/>
                                 <a id="btn_tell" href="#" class="button button-stripe">告诉我们你最想去哪旅心</a>
@@ -113,7 +113,7 @@ Volunteer+Vacation,让身体和心灵同时在路上！</p>
     <footer>
         <div class="wrap">
             <p>&copy; 2014 <strong>旅心 Voluncation.com</strong>, All Rights Reserved</p>
-            <a href="http://www.voluncation.com/en">English Version</a>
+            <a href="{:U('/en')}">English Version</a>
         </div>
         <!-- /.wrap -->
     </footer>
