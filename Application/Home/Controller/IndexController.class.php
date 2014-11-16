@@ -51,10 +51,26 @@ class IndexController extends Controller {
     {
         $data = I('post.');
         $email = strtoupper($data['email']);
+
+        //language decision
+        $lang = 'zh';
+        if(strpos($data[lang], 'en') > 0)
+        {
+            $lang = 'en';
+        }
         
         if(empty($email))
         {
-            $this->error('Your email address can not be empty!');
+            if($lang == 'zh')
+            {
+                $errMsg = "你的邮箱地址不能为空!";
+            }
+            else
+            {
+                $errMsg = "Your email address can not be empty!";
+            }
+
+            $this->error($errMsg);
         }
 
         $subscription = M('Subscription', '', 'DB_CONFIG');
@@ -72,7 +88,16 @@ class IndexController extends Controller {
             $subscription->add($tuple);
         }
 
-        $this->success('Subscription successful!', __APP__);
+        if($lang == 'zh')
+        {
+            $sucMsg = '你已经成功订阅！';
+        }
+        else
+        {
+            $sucMsg = 'Your subscription is successful!';
+        }
+
+        $this->success($sucMsg, __APP__);
     }
 
     public function tell()
@@ -82,16 +107,23 @@ class IndexController extends Controller {
 
         //language decision
         $lang = 'zh';
-        $sucMsg = '旅心已记住你的目的地，快快订阅我们第一时间收取信息吧！';
-        if(strpos($data[lang],'en')>0)
+        if(strpos($data[lang], 'en') > 0)
         {
             $lang = 'en';
-            $sucMsg = 'Voluncation writes down your desitination, subscribe to get best matches!';
         }
         
-        /*if(empty($location))
+        if(empty($location))
         {
-            $this->error('Your destination can not be empty!');
+            if($lang == 'zh')
+            {
+                $errMsg = "你的目的地不能为空!";
+            }
+            else
+            {
+                $errMsg = "Your destination can not be empty!";
+            }
+
+            $this->error($errMsg);
         }
 
         $destination = M('Destination', '', 'DB_CONFIG');
@@ -109,7 +141,16 @@ class IndexController extends Controller {
             $tuple['location'] = $location;
             $tuple['count'] = 1;
             $destination->add($tuple);
-        }*/
+        }
+
+        if($lang == 'zh')
+        {
+            $sucMsg = '旅心已记住你的目的地，快快订阅我们第一时间收取信息吧！';
+        }
+        else
+        {
+            $sucMsg = 'Voluncation writes down your desitination, subscribe to get best matches!';
+        }
 
         $this->success($sucMsg);
     }
