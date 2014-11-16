@@ -80,7 +80,16 @@ class IndexController extends Controller {
         $data = I('post.');
         $location = strtoupper($data['location']);
 
-        if(empty($location))
+        //language decision
+        $lang = 'zh';
+        $sucMsg = '旅心已记住你的目的地，快快订阅我们第一时间收取信息吧！';
+        if(strpos($data[lang],'en')>0)
+        {
+            $lang = 'en';
+            $sucMsg = 'Voluncation writes down your desitination, subscribe to get best matches!';
+        }
+        
+        /*if(empty($location))
         {
             $this->error('Your destination can not be empty!');
         }
@@ -100,9 +109,9 @@ class IndexController extends Controller {
             $tuple['location'] = $location;
             $tuple['count'] = 1;
             $destination->add($tuple);
-        }
+        }*/
 
-        $this->success('Your destination has been registered successfully!');
+        $this->success($sucMsg);
     }
 
     public function en(){

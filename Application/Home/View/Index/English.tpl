@@ -77,8 +77,8 @@ Volunteer+Vacation,让身体和心灵同时在路上！</p>
                     <div class="tab">
                         <div class="box visible">
                             <h4><strong>Thailand, Africa, Niboer, YunNan...</strong></h4>
-                            <form id="form_tell" action="{:U('Home/Index/tell/')}">
-                                <input id="location" type="input-text" placeholder="Where to go?" class="input-text">
+                            <form id="form_tell" action="{:U('/tell')}">
+                                <input id="location" type="text" placeholder="Where to go?" class="input-text">
                                 <h5>Hotplaces: <strong>Thailand, Africa, Niboer, YunNan</strong></h5>
                                 <br/>
                                 <a id="btn_tell" href="#" class="button button-stripe">Tell us your perference</a>
@@ -112,7 +112,7 @@ Volunteer+Vacation,让身体和心灵同时在路上！</p>
     <footer>
         <div class="wrap">
             <p>&copy; 2014 <strong>旅心 Voluncation.com</strong>, All Rights Reserved</p>
-            <a href="http://www.voluncation.com/zh">中文版</a>
+            <a href="{:U('/zh')}">中文版</a>
         </div>
         <!-- /.wrap -->
     </footer>
