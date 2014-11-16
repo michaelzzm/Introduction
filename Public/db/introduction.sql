@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 16, 2014 at 12:42 PM
+-- Generation Time: Nov 16, 2014 at 01:52 PM
 -- Server version: 5.5.20
 -- PHP Version: 5.3.10
 
@@ -41,9 +41,9 @@ CREATE TABLE IF NOT EXISTS `destination` (
 
 DROP TABLE IF EXISTS `destination_subscription`;
 CREATE TABLE IF NOT EXISTS `destination_subscription` (
-  `location` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `email` varchar(255) CHARACTER SET utf8 NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf16;
+  `location` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -53,11 +53,11 @@ CREATE TABLE IF NOT EXISTS `destination_subscription` (
 
 DROP TABLE IF EXISTS `subscription`;
 CREATE TABLE IF NOT EXISTS `subscription` (
-  `email` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `email` varchar(255) NOT NULL,
   `status` int(11) NOT NULL,
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf16;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
