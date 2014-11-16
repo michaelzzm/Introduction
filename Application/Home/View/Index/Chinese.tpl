@@ -72,17 +72,47 @@ Volunteer+Vacation,让身体和心灵同时在路上！</p>
                  /.wrap -->
             <!--</div>-->
             <!-- /.promo clearfix -->
+            <!--/.comments-->
+            <div class="modal fade" id="modalTell" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                <form id="form_tell" action="{:U('/tell')}">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span></button>
+                    <h4 class="modal-title" id="myModalLabel">亲，你的邮箱呢？</h4>
+                  </div>
+                  <div class="modal-body">
+                    <div id="noticetell" style="display:none" class="alert" role="alert">
+                    </div> 
+                    <div class="form-group">
+                      <label for="curpas">我们会第一时间通知你<span style="color:#5bc0de" id="user_location"></span>相关的旅心哦!</label>
+                      <input type="text" class="form-control" id="curpas" placeholder="你的Email" value="">
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" id="btn_tell" class="btn btn-primary">提交</button>
+                  </div>
+                </div>
+                </form>
+              </div>
+            </div>
             <a name="favorite"></a>
             <div class="comments clearfix">
                 <div class="wrap">
                     <div class="tab">
                         <div class="box visible">
                             <h4><strong>云南，泰国，尼泊尔，非洲...</strong></h4>
-                            <form id="form_tell" action="{:U('/tell')}">
-                                <input id="location" type="text" placeholder="去哪里呢" class="input-text" value="泰国">
+                            <form>
+                                <input id="location" type="text" placeholder="去哪里呢" class="input-text" value="">
                                 <h5>热门地点：<strong>云南，泰国，尼泊尔，非洲</strong></h5>
                                 <br/>
-                                <a id="btn_tell" href="#" class="button button-stripe">告诉我们你最想去哪旅心</a>
+                                <a data-toggle="modal" data-target="#modalTell" href="#" class="button button-stripe" onclick="changeUserLocation()">告诉我们你最想去哪旅心</a>
+                                <script>
+                                    function changeUserLocation() {
+                                        $("#user_location").text($("#location").val());
+                                    }
+                                </script>
                             </form>
                         </div>
                     </div>
