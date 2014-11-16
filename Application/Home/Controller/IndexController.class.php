@@ -52,25 +52,25 @@ class IndexController extends Controller {
         $data = I('post.');
         $email = strtoupper(trim($data['email']));
 
+        if(!filter_var($email, FILTER_VALIDATE_EMAIL))
+        {
+            if($lang == 'zh')
+            {
+                $errMsg = '请输入正确的邮箱地址。';
+            }
+            else
+            {
+                $errMsg = "Please enter your email address.";
+            }
+
+            $this->error($errMsg);
+        }
+
         //language decision
         $lang = 'zh';
         if(strpos($data[lang], 'en') > 0)
         {
             $lang = 'en';
-        }
-        
-        if(empty($email))
-        {
-            if($lang == 'zh')
-            {
-                $errMsg = "你的邮箱不能为空！";
-            }
-            else
-            {
-                $errMsg = "Your email address can not be empty!";
-            }
-
-            $this->error($errMsg);
         }
 
         $subscription = M('Subscription', '', 'DB_CONFIG');
@@ -146,6 +146,20 @@ class IndexController extends Controller {
 
         if(!empty($email))
         {
+            if(!filter_var($email, FILTER_VALIDATE_EMAIL))
+            {
+                if($lang == 'zh')
+                {
+                    $errMsg = '请输入正确的邮箱地址。';
+                }
+                else
+                {
+                    $errMsg = "Please enter your email address.";
+                }
+
+                $this->error($errMsg);
+            }
+
             $destination_subscription = M('DestinationSubscription', '', 'DB_CONFIG');
 
             $tuple['location'] = $location;
