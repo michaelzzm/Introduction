@@ -52,6 +52,13 @@ class IndexController extends Controller {
         $data = I('post.');
         $email = strtoupper(trim($data['email']));
 
+        //language decision
+        $lang = 'zh';
+        if(strpos($data[lang], 'en') > 0)
+        {
+            $lang = 'en';
+        }
+
         if(!filter_var($email, FILTER_VALIDATE_EMAIL))
         {
             if($lang == 'zh')
@@ -64,13 +71,6 @@ class IndexController extends Controller {
             }
 
             $this->error($errMsg);
-        }
-
-        //language decision
-        $lang = 'zh';
-        if(strpos($data[lang], 'en') > 0)
-        {
-            $lang = 'en';
         }
 
         $subscription = M('Subscription', '', 'DB_CONFIG');

@@ -89,15 +89,12 @@ $(document).ready(function(){
         });
 
         // UI update
-        $('#ModalTellLabel').html('Dear User,');
         $('#modal_location').hide();
         $('#modal_email').hide();
         $('#btn_tell').hide();
     });
 
     $('#modalTell').on('hidden.bs.modal', function(e) {
-        $('#ModalTellLabel').html('Dear, Your Email?');
-
         $('#noticetell').hide();
 
         $('#modal_location').val('');
