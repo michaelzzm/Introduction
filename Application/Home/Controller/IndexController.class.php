@@ -12,6 +12,8 @@ class IndexController extends Controller {
         }else if(getenv("REMOTE_ADDR")){
         $ip = getenv("REMOTE_ADDR");
         }
+        //var_dump($_SERVER['HTTP_ACCEPT_LANGUAGE']); test for browser language
+
         // IP地址合法验证
         $ips = explode(',', $ip);
         $addr = $ips[0];
@@ -19,9 +21,13 @@ class IndexController extends Controller {
         if(filter_var($addr, FILTER_VALIDATE_IP))
             $ip = $addr;
 
-        $res = @file_get_contents('http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js&ip='.$ip); 
+        if($ip=='127.0.0.1')
+            $res = @file_get_contents('http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js');
+        else
+            $res = @file_get_contents('http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js&ip='.$ip); 
         if(empty($res)){ return false; }  
         $jsonMatches = array();  
+
         preg_match('#\{.+?\}#', $res, $jsonMatches);  
         if(!isset($jsonMatches[0])){ return false; }  
         $json = json_decode($jsonMatches[0], true);  
@@ -35,9 +41,75 @@ class IndexController extends Controller {
         $country = $json[country];
         //var_dump($json);
         //$this->assign('country', $country);
-        if($country == "中国")
+        if($country == "中国" || $country == "新加坡" || $country == "")
             $this->display('Chinese');
         else
             $this->display('English');
+    }
+
+    public function subscribe()
+    {
+        $data = I('post.');
+        $email = strtoupper($data['email']);
+        
+        if(empty($email))
+        {
+            $this->error('Your email address can not be empty!');
+        }
+
+        $subscription = M('Subscription', '', 'DB_CONFIG');
+
+        $duplicate_subscriber = $subscription->where("email = '%s'", $email)->find();
+        if($duplicate_subscriber)
+        {
+            $tuple['status'] = 1;
+            $subscription->where("email = '%s'", $email)->save($tuple);
+        }
+        else
+        {
+            $tuple['email'] = $email;
+            $tuple['status'] = 1;
+            $subscription->add($tuple);
+        }
+
+        $this->success('Subscription successful!', __APP__);
+    }
+
+    public function tell()
+    {
+        $data = I('post.');
+        $location = strtoupper($data['location']);
+
+        if(empty($location))
+        {
+            $this->error('Your destination can not be empty!');
+        }
+
+        $destination = M('Destination', '', 'DB_CONFIG');
+
+        $duplicate_location = $destination->where("location = '%s'", $location)->find();
+        if($duplicate_location)
+        {
+            $count = $destination->where("location = '%s'", $location)->getField('count');
+
+            $tuple['count'] = $count + 1;
+            $destination->where("location = '%s'", $location)->save($tuple);
+        }
+        else
+        {
+            $tuple['location'] = $location;
+            $tuple['count'] = 1;
+            $destination->add($tuple);
+        }
+
+        $this->success('Your destination has been registered successfully!');
+    }
+
+    public function en(){
+        $this->display('English');
+    }
+
+    public function zh(){
+        $this->display('Chinese');
     }
 }

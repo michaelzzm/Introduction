@@ -8,8 +8,13 @@
     <title>旅心Voluncation - 让你的身体和心灵都在路上！</title>
     <meta name="description" content="公益旅行">
     <meta name="keywords" content="公益, 旅行">
+    <link rel="apple-touch-icon" href="touch/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="touch/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="touch/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="touch/apple-touch-icon-144x144.png">
     <meta name="format-detection" content="telephone=no">
     <meta name="format-detection" content="address=no">
+    <load href="__PUBLIC__/css/bootstrap.min.css" />
     <load href="__PUBLIC__/css/style.css" />
     <!--[if lt IE 9]>
         <script src="js/html5.js"></script>
@@ -46,8 +51,8 @@
                     <div class="video-share-wrapper clearfix">
                         <ul class="social-list clearfix">
                             <li class="video-share-title">分享给你的小伙伴:</li>
-                            <li><a href="#" class="social-twitter"><strong>微信</strong></a></li>
-                            <li><a href="#" class="social-facebook"><strong>微博</strong></a></li>
+                            <li><a id="wechatShare" data-toggle="popover" title="扫描以下二维码" href="#" class="social-twitter"><strong>微信</strong></a></li>
+                            <li><a href="http://v.t.sina.com.cn/share/share.php?title=旅心Voluncation - 让身体和心灵同时在路上 http://www.voluncation.com, 无论你是否听说或参加过公益旅行，只要你愿意为需要的人群贡献自己的一点时间和精力，那么就来旅心Voluncation寻找适合你的旅行项目吧！ （分享自 @旅心Voluncation）" class="social-facebook"><strong>微博</strong></a></li>
                         </ul>
                     </div>
                 </div>
@@ -96,7 +101,7 @@ Volunteer+Vacation,让身体和心灵同时在路上！</p>
                             <input id="btn_subscribe" type="button" class="button" value="订阅">
                         </form>
                     </div>
-                    <p>如果你是希望把现有项目发布在我们平台的组织或个人也可以和我们取得联系team@voluncation.com</p>
+                    <p>如果你是希望把现有项目发布在我们平台的组织或个人也可以和我们取得联系<a href="mailto:team@voluncation.com?subject=发布项目&body=请给出项目详细资料或链接">team@voluncation.com</a></p>
                 </div>
                 <!-- /.wrap -->
             </div>
@@ -108,12 +113,14 @@ Volunteer+Vacation,让身体和心灵同时在路上！</p>
     <footer>
         <div class="wrap">
             <p>&copy; 2014 <strong>旅心 Voluncation.com</strong>, All Rights Reserved</p>
+            <a href="http://www.voluncation.com/en">English Version</a>
         </div>
         <!-- /.wrap -->
     </footer>
+    <img style="display:none" src="/getqrcode.jpg">
     <load href="__PUBLIC__/js/jquery.js" />
+    <load href="__PUBLIC__/js/bootstrap.js" />
     <load href="__PUBLIC__/js/library.js" />
     <load href="__PUBLIC__/js/script.js" />
-    <load href="__PUBLIC__/js/retina.js" />
 </body>
 </html>
