@@ -67,7 +67,7 @@ class IndexController extends Controller {
             }
             else
             {
-                $errMsg = "Please enter your email address.";
+                $errMsg = "Please enter your valid email address.";
             }
 
             $this->error($errMsg);

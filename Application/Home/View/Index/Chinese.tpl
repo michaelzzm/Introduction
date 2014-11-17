@@ -87,7 +87,7 @@ Volunteer+Vacation,让身体和心灵同时在路上！</p>
                     <div class="form-group">
                       <input id="modal_location" type="text" class="form-control" id="curpas" placeholder="你的目的地" value="">
                       <br/>
-                      <input id="modal_email" type="text" class="form-control" id="curpas" placeholder="你的邮箱(可选)" value="">
+                      <input id="modal_email" type="text" class="form-control" id="curpas" placeholder="你的邮箱 (可选)" value="">
                     </div>
                   </div>
                   <div class="modal-footer">
