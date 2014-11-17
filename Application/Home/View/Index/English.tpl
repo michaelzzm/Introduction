@@ -79,20 +79,20 @@ Volunteer+Vacation,让身体和心灵同时在路上！</p>
                 <form id="form_tell" action="{:U('/tell')}">
                   <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cancel</span></button>
-                    <h4 class="modal-title" id="ModalTellLabel">Dear, Your Email?</h4>
+                    <h4 class="modal-title" id="modaltell_title">Dear User, Your Email?</h4>
                   </div>
                   <div class="modal-body">
                     <div id="noticetell" style="display:none" class="alert" role="alert">
                     </div> 
                     <div class="form-group">
-                      <label for="curpas">We'll inform you VOLUNCATION related with <span style="color:#5bc0de" id="modal_location"></span> at the first time.</label>
+                      <label id="modaltell_label" for="curpas">You have chosen <span style="color:#5bc0de" id="modal_location"></span> as your preference.</label>
                       <br/>
-                      <input id="modal_email" type="text" class="form-control" id="curpas" placeholder="Your Email (Optional)" value="">
+                      <input id="modaltell_email" type="text" class="form-control" id="curpas" placeholder="Your Email Address (Optional)" value="">
                     </div>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <button type="button" id="btn_tell" class="btn btn-primary">Submit</button>
+                    <button type="button" id="btn_tell_cancel" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" id="btn_tell" class="btn btn-primary">Confirm</button>
                   </div>
                 </div>
                 </form>

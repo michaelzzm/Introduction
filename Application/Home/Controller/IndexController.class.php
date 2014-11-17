@@ -112,16 +112,16 @@ class IndexController extends Controller {
         {
             $lang = 'en';
         }
-        
-        if(empty($location))
+
+        if(!empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL))
         {
             if($lang == 'zh')
             {
-                $errMsg = "你的目的地不能为空！";
+                $errMsg = '请输入正确的邮箱地址。';
             }
             else
             {
-                $errMsg = "Your destination can not be empty!";
+                $errMsg = "Please enter your valid email address.";
             }
 
             $this->error($errMsg);
@@ -146,20 +146,6 @@ class IndexController extends Controller {
 
         if(!empty($email))
         {
-            if(!filter_var($email, FILTER_VALIDATE_EMAIL))
-            {
-                if($lang == 'zh')
-                {
-                    $errMsg = '请输入正确的邮箱地址。';
-                }
-                else
-                {
-                    $errMsg = "Please enter your email address.";
-                }
-
-                $this->error($errMsg);
-            }
-
             $destination_subscription = M('DestinationSubscription', '', 'DB_CONFIG');
 
             $tuple['location'] = $location;
@@ -168,24 +154,27 @@ class IndexController extends Controller {
 
             if($lang == 'zh')
             {
-                $sucMsg = '我们会第一时间通知你'. $location. '相关的旅心哦!';
+                $sucMsg = '我们会第一时间通过'.$email.'告知你'.$location.'相关的旅心哦!';
             }
             else
             {
-                $sucMsg = 'We will inform you Voluncation related with '. $location. ' at the first time!';
+                $sucMsg = 'We will inform you VOLUNCATION related with '.$location.' via '.$email.' at the first time!';
             }
         }
         else
         {
             if($lang == 'zh')
             {
-                $sucMsg = '旅心已记住你的目的地: '. $location. '。 快快订阅我们第一时间收取信息吧！';
+                $sucMsg = '旅心已记住你的目的地: '.$location.'。快快订阅我们第一时间收取信息吧！';
             }
             else
             {
-                $sucMsg = 'Voluncation writes down your desitination: '. $location. '</br>' . 'Please subscribe to get the up-to-date info!';
+                $sucMsg = 'VOLUNCATION notes your desitination: '.$location.'. Please SUBSCRIBE to get better informed!';
             }
         }
+       
+            
+        
 
         $this->success($sucMsg);
     }

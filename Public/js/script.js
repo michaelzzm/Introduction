@@ -69,9 +69,12 @@ $(document).ready(function(){
         $.ajax({
             type: 'POST',
             url: action,
-            data: {location:$('#modal_location').val(), email:$('#modal_email').val(), lang:$('#form_tell')[0].baseURI},
+            data: {location:$('#location').val(), email:$('#modaltell_email').val(), lang:$('#form_tell')[0].baseURI},
             dataType: 'json',
             success: function(data) {
+
+                $('#modaltell_title').html("Dear User,");
+
                  if(data['status'] != 1)
                 {
                     $('#noticetell').removeClass('alert-success').addClass('alert-danger');
@@ -80,29 +83,36 @@ $(document).ready(function(){
                 {
                     $('#noticetell').removeClass('alert-danger').addClass('alert-success');
                 }
-
                 $('#noticetell').html(data['info']);
                 $('#noticetell').show();
 
+                $('#modaltell_label').hide();
+
+                $('#modaltell_email').hide();
+
+                $('#btn_tell_cancel').html("OK");
+                $('#btn_tell').hide();
+                
                 $('#location').val('');
             }
         });
+    });
 
-        // UI update
-        $('#modal_location').hide();
-        $('#modal_email').hide();
-        $('#btn_tell').hide();
+    $('#modal_alert').on('hidden.bs.modal', function(e) {
+        $('#modal_alert_notice').hide();
     });
 
     $('#modalTell').on('hidden.bs.modal', function(e) {
+        $('#modaltell_title').html("Dear User, Your Email?");
+
         $('#noticetell').hide();
 
-        $('#modal_location').val('');
-        $('#modal_location').show();
+        $('#modaltell_label').show();
 
-        $('#modal_email').val('');
-        $('#modal_email').show();
+        $('#modaltell_email').val('');
+        $('#modaltell_email').show();
 
+        $('#btn_tell_cancel').html("Cancel");
         $('#btn_tell').show();
     });
 
