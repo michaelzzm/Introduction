@@ -82,8 +82,6 @@ Volunteer+Vacation,让身体和心灵同时在路上！</p>
                     <h4 class="modal-title" id="modaltell_title">Dear User, Your Email?</h4>
                   </div>
                   <div class="modal-body">
-                    <div id="noticetell" style="display:none" class="alert" role="alert">
-                    </div> 
                     <div class="form-group">
                       <label id="modaltell_label" for="curpas">You have chosen <span style="color:#5bc0de" id="modal_location"></span> as your preference.</label>
                       <br/>

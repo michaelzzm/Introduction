@@ -77,17 +77,17 @@ $(document).ready(function(){
     $('#btn_tell').click(function(){
         var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
         if(!filter.test($('#modaltell_email').val()))
-        {
-            $('#noticetell').removeClass('alert-success').addClass('alert-danger');
-            $('#noticetell').html("Please enter valid email address.");
-            $('#noticetell').show();
+        {   
+            $('#modal_alert_notice').removeClass('alert-success').addClass('alert-danger');
+            $('#modal_alert_notice').html("Please enter valid email address.");
+            $('#modal_alert_notice').show();
+
+            $('#modal_alert').modal('show');
 
             $('#modaltell_email').val('');
         }
         else
         {
-            $('#noticetell').hide();
-
             var action = $('#form_tell').attr('action');
             $.ajax({
                 type: 'POST',
@@ -95,25 +95,19 @@ $(document).ready(function(){
                 data: {location:$('#modal_location').text(), email:$('#modaltell_email').val(), lang:$('#form_tell')[0].baseURI},
                 dataType: 'json',
                 success: function(data) {
-                    $('#modaltell_title').html("Dear User,");
-
-                     if(data['status'] != 1)
+                    if(data['status'] != 1)
                     {
-                        $('#noticetell').removeClass('alert-success').addClass('alert-danger');
+                        $('#modal_alert_notice').removeClass('alert-success').addClass('alert-danger');
                     }
                     else
                     {
-                        $('#noticetell').removeClass('alert-danger').addClass('alert-success');
+                        $('#modal_alert_notice').removeClass('alert-danger').addClass('alert-success');
                     }
-                    $('#noticetell').html(data['info']);
-                    $('#noticetell').show();
-
-                    $('#modaltell_label').hide();
-
-                    $('#modaltell_email').hide();
-
-                    $('#btn_tell_cancel').html("OK");
-                    $('#btn_tell').hide();
+                    $('#modal_alert_notice').html(data['info']);
+                    $('#modal_alert_notice').show();
+                    
+                    $('#modalTell').modal('hide');
+                    $('#modal_alert').modal('show');
                 }
             });
         }
