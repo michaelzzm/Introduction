@@ -39,11 +39,11 @@ $(document).ready(function(){
         var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
         if(!filter.test($('#email').val()))
         {
-            $('#subscriptionnotice').removeClass('alert-success').addClass('alert-danger');
-            $('#subscriptionnotice').html("Please enter valid email address.");
-            $('#subscriptionnotice').show();
+            $('#modal_alert_notice').removeClass('alert-success').addClass('alert-danger');
+            $('#modal_alert_notice').html("Please enter valid email address.");
+            $('#modal_alert_notice').show();
 
-            $('#modal_subscription').modal('show');
+            $('#modal_alert').modal('show');
         }
         else
         {
@@ -56,17 +56,17 @@ $(document).ready(function(){
                 success: function(data) {
                     if(data['status'] != 1)
                     {
-                        $('#subscriptionnotice').removeClass('alert-success').addClass('alert-danger');
+                        $('#modal_alert_notice').removeClass('alert-success').addClass('alert-danger');
                     }
                     else
                     {
-                        $('#subscriptionnotice').removeClass('alert-danger').addClass('alert-success');
+                        $('#modal_alert_notice').removeClass('alert-danger').addClass('alert-success');
                     }
 
-                    $('#subscriptionnotice').html(data['info']);
-                    $('#subscriptionnotice').show();
+                    $('#modal_alert_notice').html(data['info']);
+                    $('#modal_alert_notice').show();
 
-                    $('#modal_subscription').modal('show');
+                    $('#modal_alert').modal('show');
                 }
             });
         }
@@ -74,10 +74,6 @@ $(document).ready(function(){
         $('#email').val('');
     });
 
-    $('#modal_subscription').on('hidden.bs.modal', function(e) {
-        $('#subscriptionnotice').hide();
-    });
-    
     $('#btn_tell').click(function(){
         var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
         if(!filter.test($('#modaltell_email').val()))
