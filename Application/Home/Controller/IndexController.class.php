@@ -73,20 +73,7 @@ class IndexController extends Controller {
             $this->error($errMsg);
         }
 
-        $subscription = M('Subscription', '', 'DB_CONFIG');
-
-        $duplicate_subscriber = $subscription->where("email = '%s'", $email)->find();
-        if($duplicate_subscriber)
-        {
-            $tuple['status'] = 1;
-            $subscription->where("email = '%s'", $email)->save($tuple);
-        }
-        else
-        {
-            $tuple['email'] = $email;
-            $tuple['status'] = 1;
-            $subscription->add($tuple);
-        }
+        add_new_user($email);
 
         if($lang == 'zh')
         {
@@ -129,8 +116,8 @@ class IndexController extends Controller {
 
         $destination = M('Destination', '', 'DB_CONFIG');
 
-        $duplicate_location = $destination->where("location = '%s'", $location)->find();
-        if($duplicate_location)
+        $duplicate_entry = $destination->where("location = '%s'", $location)->find();
+        if($duplicate_entry)
         {
             $count = $destination->where("location = '%s'", $location)->getField('count');
 
@@ -148,9 +135,15 @@ class IndexController extends Controller {
         {
             $destination_subscription = M('DestinationSubscription', '', 'DB_CONFIG');
 
-            $tuple['location'] = $location;
-            $tuple['email'] = $email;
-            $destination_subscription->add($tuple);
+            $duplicate_entry = $destination_subscription->where("location = '%s' and email = '%s'", $location, $email)->find();
+            if(!$duplicate_entry)
+            {
+                $tuple['location'] = $location;
+                $tuple['email'] = $email;
+                $destination_subscription->add($tuple);
+            }
+
+            add_new_user($email);
 
             if($lang == 'zh')
             {
@@ -173,9 +166,6 @@ class IndexController extends Controller {
             }
         }
        
-            
-        
-
         $this->success($sucMsg);
     }
 
