@@ -87,7 +87,7 @@ Volunteer+Vacation,让身体和心灵同时在路上！</p>
                     <div class="form-group">
                       <label id="modaltell_label" for="curpas">You have chosen <span style="color:#5bc0de" id="modal_location"></span> as your preference.</label>
                       <br/>
-                      <input id="modaltell_email" type="text" class="form-control" id="curpas" placeholder="Your Email Address (Optional)" value="">
+                      <input id="modaltell_email" type="text" class="form-control" id="curpas" placeholder="Your Email Address" value="">
                     </div>
                   </div>
                   <div class="modal-footer">
@@ -141,6 +141,8 @@ Volunteer+Vacation,让身体和心灵同时在路上！</p>
                                             $("#tellus").attr("data-target", "#modalTell");
                                             $("#modal_location").text($("#location").val().trim().toUpperCase());
                                         }
+
+                                        $("#location").val('');
                                     }
                                 </script>
                             </form>

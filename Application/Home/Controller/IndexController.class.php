@@ -59,20 +59,6 @@ class IndexController extends Controller {
             $lang = 'en';
         }
 
-        if(!filter_var($email, FILTER_VALIDATE_EMAIL))
-        {
-            if($lang == 'zh')
-            {
-                $errMsg = '请输入正确的邮箱地址。';
-            }
-            else
-            {
-                $errMsg = "Please enter your valid email address.";
-            }
-
-            $this->error($errMsg);
-        }
-
         add_new_user($email);
 
         if($lang == 'zh')
@@ -99,73 +85,43 @@ class IndexController extends Controller {
         {
             $lang = 'en';
         }
-
-        if(!empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL))
-        {
-            if($lang == 'zh')
-            {
-                $errMsg = '请输入正确的邮箱地址。';
-            }
-            else
-            {
-                $errMsg = "Please enter your valid email address.";
-            }
-
-            $this->error($errMsg);
-        }
-
-        $destination = M('Destination', '', 'DB_CONFIG');
-
-        $duplicate_entry = $destination->where("location = '%s'", $location)->find();
-        if($duplicate_entry)
-        {
-            $count = $destination->where("location = '%s'", $location)->getField('count');
-
-            $tuple['count'] = $count + 1;
-            $destination->where("location = '%s'", $location)->save($tuple);
-        }
-        else
+       
+        $destination_subscription = M('DestinationSubscription', '', 'DB_CONFIG');
+        $duplicate_entry = $destination_subscription->where("location = '%s' and email = '%s'", $location, $email)->find();
+        if(!$duplicate_entry)
         {
             $tuple['location'] = $location;
-            $tuple['count'] = 1;
-            $destination->add($tuple);
-        }
+            $tuple['email'] = $email;
+            $destination_subscription->add($tuple);
 
-        if(!empty($email))
-        {
-            $destination_subscription = M('DestinationSubscription', '', 'DB_CONFIG');
-
-            $duplicate_entry = $destination_subscription->where("location = '%s' and email = '%s'", $location, $email)->find();
-            if(!$duplicate_entry)
+            $destination = M('Destination', '', 'DB_CONFIG');
+            $duplicate_entry = $destination->where("location = '%s'", $location)->find();
+            if($duplicate_entry)
             {
-                $tuple['location'] = $location;
-                $tuple['email'] = $email;
-                $destination_subscription->add($tuple);
-            }
+                $count = $destination->where("location = '%s'", $location)->getField('count');
 
-            add_new_user($email);
-
-            if($lang == 'zh')
-            {
-                $sucMsg = '我们会第一时间通过'.$email.'告知你'.$location.'相关的旅心哦!';
+                $tuple['count'] = $count + 1;
+                $destination->where("location = '%s'", $location)->save($tuple);
             }
             else
             {
-                $sucMsg = 'We will inform you VOLUNCATION related with '.$location.' via '.$email.' at the first time!';
+                $tuple['location'] = $location;
+                $tuple['count'] = 1;
+                $destination->add($tuple);
             }
+        }
+
+        add_new_user($email);
+
+        if($lang == 'zh')
+        {
+            $sucMsg = '我们会第一时间通过'.$email.'告知你'.$location.'相关的旅心哦!';
         }
         else
         {
-            if($lang == 'zh')
-            {
-                $sucMsg = '旅心已记住你的目的地: '.$location.'。快快订阅我们第一时间收取信息吧！';
-            }
-            else
-            {
-                $sucMsg = 'VOLUNCATION notes your desitination: '.$location.'. Please SUBSCRIBE to get better informed!';
-            }
+            $sucMsg = 'We will inform you VOLUNCATION related with '.$location.' via '.$email.' at the first time!';
         }
-       
+         
         $this->success($sucMsg);
     }
 

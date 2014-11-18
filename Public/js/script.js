@@ -1,3 +1,5 @@
+
+
 $(document).ready(function(){
 
     //nojs
@@ -34,30 +36,42 @@ $(document).ready(function(){
     }
 
     $('#btn_subscribe').click(function(){
-        var action = $('#form_subscription').attr('action');
-        $.ajax({
-            type: 'POST',
-            url: action,
-            data: {email:$('#email').val(), lang:$('#form_subscription')[0].baseURI},
-            dataType: 'json',
-            success: function(data) {
-                if(data['status'] != 1)
-                {
-                    $('#subscriptionnotice').removeClass('alert-success').addClass('alert-danger');
+        var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+        if(!filter.test($('#email').val()))
+        {
+            $('#subscriptionnotice').removeClass('alert-success').addClass('alert-danger');
+            $('#subscriptionnotice').html("Please enter valid email address.");
+            $('#subscriptionnotice').show();
+
+            $('#modal_subscription').modal('show');
+        }
+        else
+        {
+            var action = $('#form_subscription').attr('action');
+            $.ajax({
+                type: 'POST',
+                url: action,
+                data: {email:$('#email').val(), lang:$('#form_subscription')[0].baseURI},
+                dataType: 'json',
+                success: function(data) {
+                    if(data['status'] != 1)
+                    {
+                        $('#subscriptionnotice').removeClass('alert-success').addClass('alert-danger');
+                    }
+                    else
+                    {
+                        $('#subscriptionnotice').removeClass('alert-danger').addClass('alert-success');
+                    }
+
+                    $('#subscriptionnotice').html(data['info']);
+                    $('#subscriptionnotice').show();
+
+                    $('#modal_subscription').modal('show');
                 }
-                else
-                {
-                    $('#subscriptionnotice').removeClass('alert-danger').addClass('alert-success');
-                }
+            });
+        }
 
-                $('#subscriptionnotice').html(data['info']);
-                $('#subscriptionnotice').show();
-
-                $('#modal_subscription').modal('show');
-
-                $('#email').val('');
-            }
-        });
+        $('#email').val('');
     });
 
     $('#modal_subscription').on('hidden.bs.modal', function(e) {
@@ -65,37 +79,48 @@ $(document).ready(function(){
     });
     
     $('#btn_tell').click(function(){
-        var action = $('#form_tell').attr('action');
-        $.ajax({
-            type: 'POST',
-            url: action,
-            data: {location:$('#location').val(), email:$('#modaltell_email').val(), lang:$('#form_tell')[0].baseURI},
-            dataType: 'json',
-            success: function(data) {
+        var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+        if(!filter.test($('#modaltell_email').val()))
+        {
+            $('#noticetell').removeClass('alert-success').addClass('alert-danger');
+            $('#noticetell').html("Please enter valid email address.");
+            $('#noticetell').show();
 
-                $('#modaltell_title').html("Dear User,");
+            $('#modaltell_email').val('');
+        }
+        else
+        {
+            $('#noticetell').hide();
 
-                 if(data['status'] != 1)
-                {
-                    $('#noticetell').removeClass('alert-success').addClass('alert-danger');
+            var action = $('#form_tell').attr('action');
+            $.ajax({
+                type: 'POST',
+                url: action,
+                data: {location:$('#modal_location').text(), email:$('#modaltell_email').val(), lang:$('#form_tell')[0].baseURI},
+                dataType: 'json',
+                success: function(data) {
+                    $('#modaltell_title').html("Dear User,");
+
+                     if(data['status'] != 1)
+                    {
+                        $('#noticetell').removeClass('alert-success').addClass('alert-danger');
+                    }
+                    else
+                    {
+                        $('#noticetell').removeClass('alert-danger').addClass('alert-success');
+                    }
+                    $('#noticetell').html(data['info']);
+                    $('#noticetell').show();
+
+                    $('#modaltell_label').hide();
+
+                    $('#modaltell_email').hide();
+
+                    $('#btn_tell_cancel').html("OK");
+                    $('#btn_tell').hide();
                 }
-                else
-                {
-                    $('#noticetell').removeClass('alert-danger').addClass('alert-success');
-                }
-                $('#noticetell').html(data['info']);
-                $('#noticetell').show();
-
-                $('#modaltell_label').hide();
-
-                $('#modaltell_email').hide();
-
-                $('#btn_tell_cancel').html("OK");
-                $('#btn_tell').hide();
-                
-                $('#location').val('');
-            }
-        });
+            });
+        }
     });
 
     $('#modal_alert').on('hidden.bs.modal', function(e) {
