@@ -172,6 +172,7 @@ Volunteer+Vacation,让身体和心灵同时在路上！</p>
         <!-- /.spanning-columns -->
     </div>
     <!-- /.main -->
+    <>
     <footer>
         <div class="wrap">
             <p>&copy; 2014 <strong>旅心 Voluncation.com</strong>, All Rights Reserved</p>

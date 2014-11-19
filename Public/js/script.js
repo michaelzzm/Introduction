@@ -4,6 +4,24 @@ function stopRKey(evt) {
   if ((evt.keyCode == 13) && (node.type=="text"))  {return false;} 
 };
 
+function showAlert(msg)
+{
+    $('#modal_alert_notice').removeClass('alert-success').addClass('alert-danger');
+    $('#modal_alert_notice').html(msg);
+    $('#modal_alert_notice').show();
+
+    $('#modal_alert').modal('show');
+};
+
+function showInfo(msg)
+{
+    $('#modal_alert_notice').removeClass('alert-danger').addClass('alert-success');
+    $('#modal_alert_notice').html(msg);
+    $('#modal_alert_notice').show();
+
+    $('#modal_alert').modal('show');
+};
+
 document.onkeypress = stopRKey;
 
 $(document).ready(function(){
@@ -51,19 +69,18 @@ $(document).ready(function(){
             success: function(data) {
                 if(data['status'] != 1)
                 {
-                    $('#modal_alert_notice').removeClass('alert-success').addClass('alert-danger');
+                    showAlert(data['info']); 
                 }
                 else
                 {
-                    $('#modal_alert_notice').removeClass('alert-danger').addClass('alert-success');
+                    showInfo(data['info']);
                 }
 
-                $('#modal_alert_notice').html(data['info']);
-                $('#modal_alert_notice').show();
-
-                $('#modal_alert').modal('show');
-
                 $('#email').val('');
+            },
+            error: function()
+            {
+                showAlert("Ooops! An unexpected error occured. Please try again later.");
             }
         });
     });
@@ -78,20 +95,20 @@ $(document).ready(function(){
             success: function(data) {
                 if(data['status'] != 1)
                 {
-                    $('#modal_alert_notice').removeClass('alert-success').addClass('alert-danger');
+                    showAlert(data['info']);
                 }
                 else
                 {
-                    $('#modal_alert_notice').removeClass('alert-danger').addClass('alert-success');
-
                     $('#modalTell').modal('hide');
+                    
+                    showInfo(data['info']);
                 }
-                $('#modal_alert_notice').html(data['info']);
-                $('#modal_alert_notice').show();
-                
-                $('#modal_alert').modal('show');
 
                 $('#modaltell_email').val('');
+            },
+            error: function()
+            {
+                showAlert("Ooops! An unexpected error occured. Please try again later.");
             }
         });
     });

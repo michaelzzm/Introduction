@@ -20,7 +20,7 @@ class IndexController extends Controller {
         {
             $lang = 'en';
         }
-        if(strpos($data[lang], 'zh') > 0)
+        else if(strpos($data[lang], 'zh') > 0)
         {
             $lang = 'zh';
         }
@@ -65,7 +65,7 @@ class IndexController extends Controller {
         {
             $lang = 'en';
         }
-        if(strpos($data[lang], 'zh') > 0)
+        else if(strpos($data[lang], 'zh') > 0)
         {
             $lang = 'zh';
         }
