@@ -36,81 +36,56 @@ $(document).ready(function(){
     }
 
     $('#btn_subscribe').click(function(){
-        var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-        if(!filter.test($('#email').val()))
-        {
-            $('#modal_alert_notice').removeClass('alert-success').addClass('alert-danger');
-            $('#modal_alert_notice').html("Please enter valid email address.");
-            $('#modal_alert_notice').show();
-
-            $('#modal_alert').modal('show');
-        }
-        else
-        {
-            var action = $('#form_subscription').attr('action');
-            $.ajax({
-                type: 'POST',
-                url: action,
-                data: {email:$('#email').val(), lang:$('#form_subscription')[0].baseURI},
-                dataType: 'json',
-                success: function(data) {
-                    if(data['status'] != 1)
-                    {
-                        $('#modal_alert_notice').removeClass('alert-success').addClass('alert-danger');
-                    }
-                    else
-                    {
-                        $('#modal_alert_notice').removeClass('alert-danger').addClass('alert-success');
-                    }
-
-                    $('#modal_alert_notice').html(data['info']);
-                    $('#modal_alert_notice').show();
-
-                    $('#modal_alert').modal('show');
+        var action = $('#form_subscription').attr('action');
+        $.ajax({
+            type: 'POST',
+            url: action,
+            data: {email:$('#email').val(), lang:$('#form_subscription')[0].baseURI},
+            dataType: 'json',
+            success: function(data) {
+                if(data['status'] != 1)
+                {
+                    $('#modal_alert_notice').removeClass('alert-success').addClass('alert-danger');
                 }
-            });
-        }
+                else
+                {
+                    $('#modal_alert_notice').removeClass('alert-danger').addClass('alert-success');
+                }
 
-        $('#email').val('');
+                $('#modal_alert_notice').html(data['info']);
+                $('#modal_alert_notice').show();
+
+                $('#modal_alert').modal('show');
+
+                $('#email').val('');
+            }
+        });
     });
 
-    $('#btn_tell').click(function(){
-        var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-        if(!filter.test($('#modaltell_email').val()))
-        {   
-            $('#modal_alert_notice').removeClass('alert-success').addClass('alert-danger');
-            $('#modal_alert_notice').html("Please enter valid email address.");
-            $('#modal_alert_notice').show();
-
-            $('#modal_alert').modal('show');
-
-            $('#modaltell_email').val('');
-        }
-        else
-        {
-            var action = $('#form_tell').attr('action');
-            $.ajax({
-                type: 'POST',
-                url: action,
-                data: {location:$('#modal_location').text(), email:$('#modaltell_email').val(), lang:$('#form_tell')[0].baseURI},
-                dataType: 'json',
-                success: function(data) {
-                    if(data['status'] != 1)
-                    {
-                        $('#modal_alert_notice').removeClass('alert-success').addClass('alert-danger');
-                    }
-                    else
-                    {
-                        $('#modal_alert_notice').removeClass('alert-danger').addClass('alert-success');
-                    }
-                    $('#modal_alert_notice').html(data['info']);
-                    $('#modal_alert_notice').show();
-                    
-                    $('#modalTell').modal('hide');
-                    $('#modal_alert').modal('show');
+    $('#btn_tell').click(function(){ 
+        var action = $('#form_tell').attr('action');
+        $.ajax({
+            type: 'POST',
+            url: action,
+            data: {location:$('#modal_location').text(), email:$('#modaltell_email').val(), lang:$('#form_tell')[0].baseURI},
+            dataType: 'json',
+            success: function(data) {
+                if(data['status'] != 1)
+                {
+                    $('#modal_alert_notice').removeClass('alert-success').addClass('alert-danger');
                 }
-            });
-        }
+                else
+                {
+                    $('#modal_alert_notice').removeClass('alert-danger').addClass('alert-success');
+
+                    $('#modalTell').modal('hide');
+                }
+                $('#modal_alert_notice').html(data['info']);
+                $('#modal_alert_notice').show();
+                
+                $('#modal_alert').modal('show');
+            }
+        });
     });
 
     $('#modal_alert').on('hidden.bs.modal', function(e) {

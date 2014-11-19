@@ -59,6 +59,20 @@ class IndexController extends Controller {
             $lang = 'en';
         }
 
+        if(!filter_var($email, FILTER_VALIDATE_EMAIL))
+        {
+            if($lang == 'zh')
+            {
+                $errMsg = '请输入正确的邮箱地址。';
+            }
+            else
+            {
+                $errMsg = "Please enter valid email address.";
+            }
+
+            $this->error($errMsg);
+        }
+
         add_new_user($email);
 
         if($lang == 'zh')
@@ -84,6 +98,20 @@ class IndexController extends Controller {
         if(strpos($data[lang], 'en') > 0)
         {
             $lang = 'en';
+        }
+
+        if(!filter_var($email, FILTER_VALIDATE_EMAIL))
+        {
+            if($lang == 'zh')
+            {
+                $errMsg = '请输入正确的邮箱地址。';
+            }
+            else
+            {
+                $errMsg = "Please enter valid email address.";
+            }
+
+            $this->error($errMsg);
         }
        
         $destination_subscription = M('DestinationSubscription', '', 'DB_CONFIG');
