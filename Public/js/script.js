@@ -84,6 +84,8 @@ $(document).ready(function(){
                 $('#modal_alert_notice').show();
                 
                 $('#modal_alert').modal('show');
+
+                $('#modaltell_email').val('');
             }
         });
     });
