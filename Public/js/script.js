@@ -118,17 +118,7 @@ $(document).ready(function(){
     });
 
     $('#modalTell').on('hidden.bs.modal', function(e) {
-        $('#modaltell_title').html("Dear User, Your Email?");
-
-        $('#noticetell').hide();
-
-        $('#modaltell_label').show();
-
         $('#modaltell_email').val('');
-        $('#modaltell_email').show();
-
-        $('#btn_tell_cancel').html("Cancel");
-        $('#btn_tell').show();
     });
 
     $("#getIp").click(function(){
