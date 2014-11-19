@@ -104,7 +104,7 @@ Volunteer+Vacation,让身体和心灵同时在路上！</p>
                         <div class="box visible">
                             <h4><strong>泰国，非洲，尼泊尔，云南。。。</strong></h4>
                             <form>
-                                <input id="location" type="text" placeholder="Where to go?" class="input-text">
+                                <input id="location" type="text" placeholder="去哪里呢" class="input-text">
                                 <h5>热门地点：<strong>泰国，非洲，尼泊尔，云南</strong></h5>
                                 <br/>
                                 <a id="tellus" data-toggle="modal" data-target="#modalTell" href="#" class="button button-stripe"  onclick="changeUserLocation()">告诉我们你最想去哪旅心</a>
