@@ -78,21 +78,19 @@ Volunteer+Vacation,让身体和心灵同时在路上！</p>
                 <div class="modal-content">
                 <form id="form_tell" action="{:U('/tell')}">
                   <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span></button>
-                    <h4 class="modal-title" id="ModalTellLabel">亲，你的邮箱呢？</h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">取消</span></button>
+                    <h4 class="modal-title" id="modaltell_title">亲，你的邮箱呢？</h4>
                   </div>
                   <div class="modal-body">
-                    <div id="noticetell" style="display:none" class="alert" role="alert">
-                    </div> 
                     <div class="form-group">
-                      <input id="modal_location" type="text" class="form-control" id="curpas" placeholder="你的目的地" value="">
+                      <label id="modaltell_label" for="curpas">你已选择<span style="color:#5bc0de" id="modal_location"></span>作为目的地偏好。</label>
                       <br/>
-                      <input id="modal_email" type="text" class="form-control" id="curpas" placeholder="你的邮箱 (可选)" value="">
+                      <input id="modaltell_email" type="text" class="form-control" id="curpas" placeholder="你的邮箱" value="">
                     </div>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="button" id="btn_tell" class="btn btn-primary">提交</button>
+                    <button type="button" id="btn_tell_cancel" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" id="btn_tell" class="btn btn-primary">确定</button>
                   </div>
                 </div>
                 </form>
@@ -104,15 +102,28 @@ Volunteer+Vacation,让身体和心灵同时在路上！</p>
                 <div class="wrap">
                     <div class="tab">
                         <div class="box visible">
-                            <h4><strong>云南，泰国，尼泊尔，非洲...</strong></h4>
+                            <h4><strong>泰国，非洲，尼泊尔，云南。。。</strong></h4>
                             <form>
-                                <input id="location" type="text" placeholder="去哪里呢" class="input-text" value="">
-                                <h5>热门地点：<strong>云南，泰国，尼泊尔，非洲</strong></h5>
+                                <input id="location" type="text" placeholder="Where to go?" class="input-text">
+                                <h5>热门地点：<strong>泰国，非洲，尼泊尔，云南</strong></h5>
                                 <br/>
-                                <a data-toggle="modal" data-target="#modalTell" href="#" class="button button-stripe" onclick="changeUserLocation()">告诉我们你最想去哪旅心</a>
+                                <a id="tellus" data-toggle="modal" data-target="#modalTell" href="#" class="button button-stripe"  onclick="changeUserLocation()">告诉我们你最想去哪旅心</a>
                                 <script>
                                     function changeUserLocation() {
-                                        $("#modal_location").val($("#location").val().trim().toUpperCase()); 
+                                        if(!$("#location").val().trim())
+                                        {
+                                            $("#tellus").attr("data-target", "#modal_alert");
+                                            $("#modal_alert_notice").removeClass('alert-success').addClass('alert-danger');
+                                            $("#modal_alert_notice").html("请输入你的目的地偏好。");
+                                            $("#modal_alert_notice").show();
+                                        }
+                                        else
+                                        {
+                                            $("#tellus").attr("data-target", "#modalTell");
+                                            $("#modal_location").text($("#location").val().trim().toUpperCase());
+                                        }
+
+                                        $("#location").val('');
                                     }
                                 </script>
                             </form>
@@ -129,7 +140,7 @@ Volunteer+Vacation,让身体和心灵同时在路上！</p>
                     <div class="newsletter-title">订阅消息</div>
                     <div class="newsletter-form clearfix">
                         <form id="form_subscription" action="{:U('/subscribe')}">
-                            <input id="email" type="email" placeholder="你的email地址" class="input-text">
+                            <input id="email" type="email" placeholder="你的邮箱地址" class="input-text">
                             <input id="btn_subscribe" type="button" class="button" value="订阅">
                         </form>
                     </div>
@@ -140,15 +151,15 @@ Volunteer+Vacation,让身体和心灵同时在路上！</p>
             <!-- /.newsletter clearfix -->
 
             <!-- Modal -->
-            <div class="modal fade" id="modal_subscription" tabindex="-1" role="dialog" aria-labelledby="ModalSubscriptionLabel" aria-hidden="true">
+            <div class="modal fade" id="modal_alert" tabindex="-1" role="dialog" aria-labelledby="ModalAlertLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span></button>
-                    <h4 class="modal-title" id="ModalSubscriptionLabel">亲，</h4>
+                    <h4 class="modal-title" id="ModalAlertLabel">亲，</h4>
                   </div>
                   <div class="modal-body">
-                    <div id="subscriptionnotice" style="display:none" class="alert" role="alert"></div>
+                    <div id="modal_alert_notice" style="display:none" class="alert" role="alert"></div>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -156,7 +167,6 @@ Volunteer+Vacation,让身体和心灵同时在路上！</p>
                 </div>
               </div>
             </div>
-
         <!-- /.spanning-columns -->
     </div>
     <!-- /.main -->
