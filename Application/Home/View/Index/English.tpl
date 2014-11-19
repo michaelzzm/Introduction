@@ -78,42 +78,52 @@ Volunteer+Vacation,让身体和心灵同时在路上！</p>
                 <div class="modal-content">
                 <form id="form_tell" action="{:U('/tell')}">
                   <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title" id="ModalTellLabel">Dear, Your Email?</h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cancel</span></button>
+                    <h4 class="modal-title" id="modaltell_title">Dear User, Your Email?</h4>
                   </div>
                   <div class="modal-body">
-                    <div id="noticetell" style="display:none" class="alert" role="alert">
-                    </div> 
                     <div class="form-group">
-                      <input id="modal_location" type="text" class="form-control" id="curpas" placeholder="Your Destination" value="">
+                      <label id="modaltell_label" for="curpas">You have chosen <span style="color:#5bc0de" id="modal_location"></span> as your preference.</label>
                       <br/>
-                      <input id="modal_email" type="text" class="form-control" id="curpas" placeholder="Your Email(Optional)" value="">
+                      <input id="modaltell_email" type="text" class="form-control" id="curpas" placeholder="Your Email Address" value="">
                     </div>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" id="btn_tell" class="btn btn-primary">Submit</button>
+                    <button type="button" id="btn_tell_cancel" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" id="btn_tell" class="btn btn-primary">Confirm</button>
                   </div>
                 </div>
                 </form>
               </div>
             </div>
 
-
             <a name="favorite"></a>
             <div class="comments clearfix">
                 <div class="wrap">
                     <div class="tab">
                         <div class="box visible">
-                            <h4><strong>Thailand, Africa, Niboer, YunNan...</strong></h4>
+                            <h4><strong>Thailand, Africa, Nepal, YunNan...</strong></h4>
                             <form>
                                 <input id="location" type="text" placeholder="Where to go?" class="input-text">
-                                <h5>Hotplaces: <strong>Thailand, Africa, Niboer, YunNan</strong></h5>
+                                <h5>Hotplaces: <strong>Thailand, Africa, Nepal, YunNan</strong></h5>
                                 <br/>
-                                <a data-toggle="modal" data-target="#modalTell" href="#" class="button button-stripe"  onclick="changeUserLocation()">Tell us your perference</a>
+                                <a id="tellus" data-toggle="modal" data-target="#modalTell" href="#" class="button button-stripe"  onclick="changeUserLocation()">Tell us your preference</a>
                                 <script>
                                     function changeUserLocation() {
-                                        $("#modal_location").val($("#location").val().trim().toUpperCase()); 
+                                        if(!$("#location").val().trim())
+                                        {
+                                            $("#tellus").attr("data-target", "#modal_alert");
+                                            $("#modal_alert_notice").removeClass('alert-success').addClass('alert-danger');
+                                            $("#modal_alert_notice").html("Please enter your destination preference.");
+                                            $("#modal_alert_notice").show();
+                                        }
+                                        else
+                                        {
+                                            $("#tellus").attr("data-target", "#modalTell");
+                                            $("#modal_location").text($("#location").val().trim().toUpperCase());
+                                        }
+
+                                        $("#location").val('');
                                     }
                                 </script>
                             </form>
@@ -141,15 +151,15 @@ Volunteer+Vacation,让身体和心灵同时在路上！</p>
             <!-- /.newsletter clearfix -->
 
             <!-- Modal -->
-            <div class="modal fade" id="modal_subscription" tabindex="-1" role="dialog" aria-labelledby="ModalSubscriptionLabel" aria-hidden="true">
+            <div class="modal fade" id="modal_alert" tabindex="-1" role="dialog" aria-labelledby="ModalAlertLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title" id="ModalSubscriptionLabel">Dear User,</h4>
+                    <h4 class="modal-title" id="ModalAlertLabel">Dear User,</h4>
                   </div>
                   <div class="modal-body">
-                    <div id="subscriptionnotice" style="display:none" class="alert" role="alert"></div>
+                    <div id="modal_alert_notice" style="display:none" class="alert" role="alert"></div>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>

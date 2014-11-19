@@ -59,34 +59,7 @@ class IndexController extends Controller {
             $lang = 'en';
         }
 
-        if(!filter_var($email, FILTER_VALIDATE_EMAIL))
-        {
-            if($lang == 'zh')
-            {
-                $errMsg = '请输入正确的邮箱地址。';
-            }
-            else
-            {
-                $errMsg = "Please enter your email address.";
-            }
-
-            $this->error($errMsg);
-        }
-
-        $subscription = M('Subscription', '', 'DB_CONFIG');
-
-        $duplicate_subscriber = $subscription->where("email = '%s'", $email)->find();
-        if($duplicate_subscriber)
-        {
-            $tuple['status'] = 1;
-            $subscription->where("email = '%s'", $email)->save($tuple);
-        }
-        else
-        {
-            $tuple['email'] = $email;
-            $tuple['status'] = 1;
-            $subscription->add($tuple);
-        }
+        add_new_user($email);
 
         if($lang == 'zh')
         {
@@ -112,81 +85,43 @@ class IndexController extends Controller {
         {
             $lang = 'en';
         }
-        
-        if(empty($location))
+       
+        $destination_subscription = M('DestinationSubscription', '', 'DB_CONFIG');
+        $duplicate_entry = $destination_subscription->where("location = '%s' and email = '%s'", $location, $email)->find();
+        if(!$duplicate_entry)
         {
-            if($lang == 'zh')
-            {
-                $errMsg = "你的目的地不能为空！";
-            }
-            else
-            {
-                $errMsg = "Your destination can not be empty!";
-            }
-
-            $this->error($errMsg);
-        }
-
-        $destination = M('Destination', '', 'DB_CONFIG');
-
-        $duplicate_location = $destination->where("location = '%s'", $location)->find();
-        if($duplicate_location)
-        {
-            $count = $destination->where("location = '%s'", $location)->getField('count');
-
-            $tuple['count'] = $count + 1;
-            $destination->where("location = '%s'", $location)->save($tuple);
-        }
-        else
-        {
-            $tuple['location'] = $location;
-            $tuple['count'] = 1;
-            $destination->add($tuple);
-        }
-
-        if(!empty($email))
-        {
-            if(!filter_var($email, FILTER_VALIDATE_EMAIL))
-            {
-                if($lang == 'zh')
-                {
-                    $errMsg = '请输入正确的邮箱地址。';
-                }
-                else
-                {
-                    $errMsg = "Please enter your email address.";
-                }
-
-                $this->error($errMsg);
-            }
-
-            $destination_subscription = M('DestinationSubscription', '', 'DB_CONFIG');
-
             $tuple['location'] = $location;
             $tuple['email'] = $email;
             $destination_subscription->add($tuple);
 
-            if($lang == 'zh')
+            $destination = M('Destination', '', 'DB_CONFIG');
+            $duplicate_entry = $destination->where("location = '%s'", $location)->find();
+            if($duplicate_entry)
             {
-                $sucMsg = '我们会第一时间通知你'. $location. '相关的旅心哦!';
+                $count = $destination->where("location = '%s'", $location)->getField('count');
+
+                $tuple['count'] = $count + 1;
+                $destination->where("location = '%s'", $location)->save($tuple);
             }
             else
             {
-                $sucMsg = 'We will inform you Voluncation related with '. $location. ' at the first time!';
-            }
-        }
-        else
-        {
-            if($lang == 'zh')
-            {
-                $sucMsg = '旅心已记住你的目的地: '. $location. '。 快快订阅我们第一时间收取信息吧！';
-            }
-            else
-            {
-                $sucMsg = 'Voluncation writes down your desitination: '. $location. '</br>' . 'Please subscribe to get the up-to-date info!';
+                $tuple['location'] = $location;
+                $tuple['count'] = 1;
+                $destination->add($tuple);
             }
         }
 
+        add_new_user($email);
+
+        if($lang == 'zh')
+        {
+            $sucMsg = '我们会第一时间通过'.$email.'告知你'.$location.'相关的旅心哦!';
+        }
+        else
+        {
+            $sucMsg = 'We will inform you VOLUNCATION related with '.$location.' via '.$email.' at the first time!';
+        }
+         
         $this->success($sucMsg);
     }
 

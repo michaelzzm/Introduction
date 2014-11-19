@@ -1,3 +1,5 @@
+
+
 $(document).ready(function(){
 
     //nojs
@@ -34,76 +36,89 @@ $(document).ready(function(){
     }
 
     $('#btn_subscribe').click(function(){
-        var action = $('#form_subscription').attr('action');
-        $.ajax({
-            type: 'POST',
-            url: action,
-            data: {email:$('#email').val(), lang:$('#form_subscription')[0].baseURI},
-            dataType: 'json',
-            success: function(data) {
-                if(data['status'] != 1)
-                {
-                    $('#subscriptionnotice').removeClass('alert-success').addClass('alert-danger');
+        var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+        if(!filter.test($('#email').val()))
+        {
+            $('#modal_alert_notice').removeClass('alert-success').addClass('alert-danger');
+            $('#modal_alert_notice').html("Please enter valid email address.");
+            $('#modal_alert_notice').show();
+
+            $('#modal_alert').modal('show');
+        }
+        else
+        {
+            var action = $('#form_subscription').attr('action');
+            $.ajax({
+                type: 'POST',
+                url: action,
+                data: {email:$('#email').val(), lang:$('#form_subscription')[0].baseURI},
+                dataType: 'json',
+                success: function(data) {
+                    if(data['status'] != 1)
+                    {
+                        $('#modal_alert_notice').removeClass('alert-success').addClass('alert-danger');
+                    }
+                    else
+                    {
+                        $('#modal_alert_notice').removeClass('alert-danger').addClass('alert-success');
+                    }
+
+                    $('#modal_alert_notice').html(data['info']);
+                    $('#modal_alert_notice').show();
+
+                    $('#modal_alert').modal('show');
                 }
-                else
-                {
-                    $('#subscriptionnotice').removeClass('alert-danger').addClass('alert-success');
-                }
+            });
+        }
 
-                $('#subscriptionnotice').html(data['info']);
-                $('#subscriptionnotice').show();
-
-                $('#modal_subscription').modal('show');
-
-                $('#email').val('');
-            }
-        });
+        $('#email').val('');
     });
 
-    $('#modal_subscription').on('hidden.bs.modal', function(e) {
-        $('#subscriptionnotice').hide();
-    });
-    
     $('#btn_tell').click(function(){
-        var action = $('#form_tell').attr('action');
-        $.ajax({
-            type: 'POST',
-            url: action,
-            data: {location:$('#modal_location').val(), email:$('#modal_email').val(), lang:$('#form_tell')[0].baseURI},
-            dataType: 'json',
-            success: function(data) {
-                 if(data['status'] != 1)
-                {
-                    $('#noticetell').removeClass('alert-success').addClass('alert-danger');
+        var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+        if(!filter.test($('#modaltell_email').val()))
+        {   
+            $('#modal_alert_notice').removeClass('alert-success').addClass('alert-danger');
+            $('#modal_alert_notice').html("Please enter valid email address.");
+            $('#modal_alert_notice').show();
+
+            $('#modal_alert').modal('show');
+
+            $('#modaltell_email').val('');
+        }
+        else
+        {
+            var action = $('#form_tell').attr('action');
+            $.ajax({
+                type: 'POST',
+                url: action,
+                data: {location:$('#modal_location').text(), email:$('#modaltell_email').val(), lang:$('#form_tell')[0].baseURI},
+                dataType: 'json',
+                success: function(data) {
+                    if(data['status'] != 1)
+                    {
+                        $('#modal_alert_notice').removeClass('alert-success').addClass('alert-danger');
+                    }
+                    else
+                    {
+                        $('#modal_alert_notice').removeClass('alert-danger').addClass('alert-success');
+                    }
+                    $('#modal_alert_notice').html(data['info']);
+                    $('#modal_alert_notice').show();
+                    
+                    $('#modalTell').modal('hide');
+                    $('#modal_alert').modal('show');
                 }
-                else
-                {
-                    $('#noticetell').removeClass('alert-danger').addClass('alert-success');
-                }
+            });
+        }
+    });
 
-                $('#noticetell').html(data['info']);
-                $('#noticetell').show();
-
-                $('#location').val('');
-            }
-        });
-
-        // UI update
-        $('#modal_location').hide();
-        $('#modal_email').hide();
-        $('#btn_tell').hide();
+    $('#modal_alert').on('hidden.bs.modal', function(e) {
+        $('#modal_alert_notice').hide();
     });
 
     $('#modalTell').on('hidden.bs.modal', function(e) {
-        $('#noticetell').hide();
-
-        $('#modal_location').val('');
-        $('#modal_location').show();
-
-        $('#modal_email').val('');
-        $('#modal_email').show();
-
-        $('#btn_tell').show();
+        $('#modaltell_email').val('');
     });
 
     $("#getIp").click(function(){

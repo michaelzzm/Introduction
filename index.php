@@ -24,6 +24,8 @@ define('BIND_CONTROLLER', 'Index');
 define('APP_PATH','./Application/');
 define('__PUBLIC__','./Public/');
 
+require './Application/Common/Common/common.php';
+
 // 引入ThinkPHP入口文件
 require './ThinkPHP/ThinkPHP.php';
 
