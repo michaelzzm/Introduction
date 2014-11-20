@@ -20,7 +20,7 @@ class IndexController extends Controller {
         {
             $lang = 'en';
         }
-        if(strpos($data[lang], 'zh') > 0)
+        else if(strpos($data[lang], 'zh') > 0)
         {
             $lang = 'zh';
         }
@@ -65,7 +65,7 @@ class IndexController extends Controller {
         {
             $lang = 'en';
         }
-        if(strpos($data[lang], 'zh') > 0)
+        else if(strpos($data[lang], 'zh') > 0)
         {
             $lang = 'zh';
         }
@@ -83,33 +83,41 @@ class IndexController extends Controller {
 
             $this->error($errMsg);
         }
-       
+
+        $subscription = M('Subscription', '', 'DB_CONFIG');
+        $destination = M('Destination', '', 'DB_CONFIG');
         $destination_subscription = M('DestinationSubscription', '', 'DB_CONFIG');
-        $duplicate_entry = $destination_subscription->where("location = '%s' and email = '%s'", $location, $email)->find();
-        if(!$duplicate_entry)
-        {
-            $tuple['location'] = $location;
-            $tuple['email'] = $email;
-            $destination_subscription->add($tuple);
-
-            $destination = M('Destination', '', 'DB_CONFIG');
-            $duplicate_entry = $destination->where("location = '%s'", $location)->find();
-            if($duplicate_entry)
-            {
-                $count = $destination->where("location = '%s'", $location)->getField('count');
-
-                $tuple['count'] = $count + 1;
-                $destination->where("location = '%s'", $location)->save($tuple);
-            }
-            else
-            {
-                $tuple['location'] = $location;
-                $tuple['count'] = 1;
-                $destination->add($tuple);
-            }
-        }
 
         add_new_user($email);
+        $email_id = $subscription->where("email = '%s'", $email)->getField('id');
+
+        $location_id = $destination->where("location = '%s'", $location)->getField('id');
+        if($location_id)
+        {
+            $duplicate_pref = $destination_subscription->where("location_id = '%s' and email_id = '%s'", $location_id, $email_id)->find();
+            if(!$duplicate_pref)
+            {
+                $tuple_pref['location_id'] = $location_id;
+                $tuple_pref['email_id'] = $email_id;
+                $destination_subscription->add($tuple_pref);
+
+                // update destination counter
+                $counter = $destination->where("id = '%s'", $location_id)->getField('count');
+                $tuple_destination['count'] =  $counter + 1;
+                $destination->where("id = '%s'", $location_id)->save($tuple_destination);
+            }
+        }
+        else
+        {
+            $tuple['location'] = $location;
+            $tuple['count'] = 1;
+            $destination->add($tuple);
+
+            // create new entry for destination_subscription
+            $tuple['location_id'] = $destination->where("location = '%s'", $location)->getField('id');
+            $tuple['email_id'] = $email_id;
+            $destination_subscription->add($tuple);
+        }
 
         if($lang == 'zh')
         {

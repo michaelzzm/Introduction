@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 16, 2014 at 01:52 PM
+-- Generation Time: Nov 20, 2014 at 10:03 AM
 -- Server version: 5.5.20
 -- PHP Version: 5.3.10
 
@@ -28,10 +28,11 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `destination`;
 CREATE TABLE IF NOT EXISTS `destination` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `location` varchar(255) NOT NULL,
   `count` int(11) NOT NULL,
-  PRIMARY KEY (`location`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -41,8 +42,9 @@ CREATE TABLE IF NOT EXISTS `destination` (
 
 DROP TABLE IF EXISTS `destination_subscription`;
 CREATE TABLE IF NOT EXISTS `destination_subscription` (
-  `location` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL
+  `location_id` int(11) NOT NULL,
+  `email_id` int(11) NOT NULL,
+  KEY `location_id` (`location_id`,`email_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -53,11 +55,12 @@ CREATE TABLE IF NOT EXISTS `destination_subscription` (
 
 DROP TABLE IF EXISTS `subscription`;
 CREATE TABLE IF NOT EXISTS `subscription` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(255) NOT NULL,
   `status` int(11) NOT NULL,
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
