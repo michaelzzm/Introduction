@@ -80,7 +80,15 @@ $(document).ready(function(){
             },
             error: function()
             {
-                showAlert("Ooops! An unexpected error occured. Please try again later.");
+                var language = window.navigator.userLanguage || window.navigator.language;
+                if(language.indexOf('zh') > -1)
+                {
+                    showAlert("出错啦！ 请稍候再试。");
+                }
+                else
+                {
+                    showAlert("An unexpected error occured! Please try again later.");
+                }
             }
         });
     });
@@ -108,7 +116,15 @@ $(document).ready(function(){
             },
             error: function()
             {
-                showAlert("Ooops! An unexpected error occured. Please try again later.");
+                var language = window.navigator.userLanguage || window.navigator.language;
+                if(language.indexOf('zh') > -1)
+                {
+                    showAlert("出错啦！ 请稍候再试。");
+                }
+                else
+                {
+                    showAlert("An unexpected error occured! Please try again later.");
+                }
             }
         });
     });

@@ -140,7 +140,7 @@ Volunteer+Vacation,让身体和心灵同时在路上！</p>
                     <div class="newsletter-title">Subscribe</div>
                     <div class="newsletter-form clearfix">
                         <form id="form_subscription" action="{:U('/subscribe')}">
-                            <input id="email" type="input-text" placeholder="Your email address" class="input-text">
+                            <input id="email" type="text" placeholder="Your email address" class="input-text">
                             <input id="btn_subscribe" type="button" class="button" value="Subscribe">
                         </form>
                     </div>
@@ -172,7 +172,6 @@ Volunteer+Vacation,让身体和心灵同时在路上！</p>
         <!-- /.spanning-columns -->
     </div>
     <!-- /.main -->
-    <>
     <footer>
         <div class="wrap">
             <p>&copy; 2014 <strong>旅心 Voluncation.com</strong>, All Rights Reserved</p>
