@@ -28,10 +28,10 @@
                 <!--<img src="upload/iphone.png" height="532" width="252" alt="" class="header-img">-->
                 <div class="header-wrapper">
                     <h1>旅心<span>Voluncation</span></h1>
-                    <p>Volunteer & Vacation, Experience your very vacation!<br/>If you are interested in volunteer tourism, or if you would like to use our platform to find volunteers for your programs, please don't hesitate to contact us! Subscribe our newsletter and stay tuned with us!</p>
+                    <p>Volunteer & Vacation, Experience Your Very Vacation!<br/><br/>旅心Voluncation is a platform for sharing and searching for global volunteer programs. If you would like to use our platform to search or post programs, please don't hesitate to subscribe our newsletter and stay tuned with us!</p>
                     <div class="buttons-wrapper">
                         <a href="#subscribe" class="button">Subscribe</a>
-                        <a href="#favorite" class="button button-stripe">Tell us your perference?</a>
+                        <a href="#favorite" class="button button-stripe">Share your dream place?</a>
                     </div>
                 </div>
                 <!-- /.header-wrapper -->
@@ -44,8 +44,8 @@
                     <div class="video-title">Coming Soon...</div>
                     <div class="video-subtitle">Our site is currently under construction. We will be available to you in the first quarter of 2015!<br/>
                     <a href="#subscribe">Subscribe</a> our newsletter and stay tuned with us!<br/>
-                    Or you want to post programs and search for their qualified volunteers, please <a href="#favorite">Contact</a> us！<br/>
-                    <span style="color:#000">Volunteer+Vacation</span>,Experience your very vacation!</div>
+                    If you want to post your own programs and search for qualified volunteers, please don't hesitate to <a href="#favorite">Contact</a> Us！<br/>
+                    <span style="color:#000">Volunteer+Vacation</span>, Experience your very vacation</div>
                     <div class="video-block">
                     </div>
                     <div class="video-share-wrapper clearfix">
@@ -144,7 +144,7 @@ Volunteer+Vacation,让身体和心灵同时在路上！</p>
                             <input id="btn_subscribe" type="button" class="button" value="Subscribe">
                         </form>
                     </div>
-                    <p>If you are those organizations in need of volunteers to post programs and search for their qualified volunteers. Please contact us at <a href="mailto:team@voluncation.com?subject=Post Program&body=Please provide program detail infomation or links of introduction">team@voluncation.com</a></p>
+                    <p>Organizations that are in need of volunteers can post programs on out platform. For more details, please contact us at <a href="mailto:team@voluncation.com?subject=Post Program&body=Please provide program detail infomation or links of introduction">team@voluncation.com</a></p>
                 </div>
                 <!-- /.wrap -->
             </div>

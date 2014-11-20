@@ -1109,3 +1109,7 @@ footer {
 .popover-content hr {
     margin: 5px 0px 0px;
 }
+.highlight {
+    color:#f0ad4e!important;
+    font-weight: bold;
+}

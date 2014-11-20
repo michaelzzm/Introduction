@@ -28,7 +28,7 @@
                 <!--<img src="upload/iphone.png" height="532" width="252" alt="" class="header-img">-->
                 <div class="header-wrapper">
                     <h1>旅心<span>Voluncation</span></h1>
-                    <p>让你的身体和心灵都在路上！<br/>无论你是否听说或参加过公益旅行，只要你愿意为需要的人群贡献自己的一点时间和精力，那么就来旅心Voluncation寻找适合你的旅行项目吧！</p>
+                    <p>旅心，让身体和心灵同时在路上！<br/><br/>无论你是否听说或参加过<span class="highlight"><a class="highlight" href="http://baike.baidu.com/view/6719850.htm">公益旅行</a></span>，只要你乐于<span class="highlight">分享奉献</span>，敢于<span class="highlight">闯荡世界</span>，那么就来旅心Voluncation寻找适合你的旅行项目吧！</p>
                     <div class="buttons-wrapper">
                         <a href="#subscribe" class="button">订阅消息</a>
                         <a href="#favorite" class="button button-stripe">告诉我们你最想去哪？</a>
@@ -144,7 +144,7 @@ Volunteer+Vacation,让身体和心灵同时在路上！</p>
                             <input id="btn_subscribe" type="button" class="button" value="订阅">
                         </form>
                     </div>
-                    <p>如果你是希望把现有项目发布在我们平台的组织或个人也可以和我们取得联系<a href="mailto:team@voluncation.com?subject=发布项目&body=请给出项目详细资料或链接">team@voluncation.com</a></p>
+                    <p>希望把现有项目发布在我们平台的组织或个人也请和我们取得联系<a href="mailto:team@voluncation.com?subject=发布项目&body=请给出项目详细资料或链接">team@voluncation.com</a></p>
                 </div>
                 <!-- /.wrap -->
             </div>
