@@ -43,8 +43,8 @@ class IndexController extends Controller {
         add_new_user($email);
 
         // send confimation mail for subscription
-        $subject = "Hi,旅心Voluncation！欢迎加入旅心Voluncation！";
-        $content = "Hi! Welcome to VOLUNCATION";
+        $subject = "Hi！欢迎加入旅心Voluncation！";
+        $content = file_get_contents('Public/template.html');
         send_mail($email, $subject, $content);
 
         if($lang == 'zh')

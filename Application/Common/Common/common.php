@@ -45,7 +45,8 @@ function send_mail($email, $subject, $content)
     $mail->addAddress($email);
 
     $mail->Subject = $subject;
-    $mail->MsgHTML($content);
+    $mail->isHTML(true);
+    $mail->msgHTML($content);
 
     return $mail->send() ? true : $mail->ErrorInfo;
 }
