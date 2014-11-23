@@ -1,6 +1,7 @@
 <?php
 namespace Home\Controller;
 use Think\Controller;
+
 class IndexController extends Controller {
     public function index(){
         if(get_lang()=='zh')
@@ -10,7 +11,7 @@ class IndexController extends Controller {
     }
 
     public function subscribe()
-    {
+    {   
         $data = I('post.');
         $email = strtoupper(trim($data['email']));
 
@@ -40,6 +41,11 @@ class IndexController extends Controller {
         }
 
         add_new_user($email);
+
+        // send confimation mail for subscription
+        $subject = "Hi！欢迎加入旅心Voluncation！";
+        $content = file_get_contents('Public/template.html');
+        send_mail($email, $subject, $content);
 
         if($lang == 'zh')
         {

@@ -1,4 +1,5 @@
 <?php
+use Vendor\PHPMailer;
 
 function add_new_user($email)
 {
@@ -16,6 +17,38 @@ function add_new_user($email)
         $tuple['status'] = 1;
         $subscription->add($tuple);
     }
+}
+
+function send_mail($email, $subject, $content)
+{
+    vendor('PHPMailer.class#phpmailer');
+    vendor('PHPMailer.PHPMailerAutoload');
+
+    $config = C('EMAIL_CONFIG');
+
+    $mail= new \PHPMailer(); 
+    $mail->isSMTP();                                
+    $mail->SMTPAuth = true;                        
+    $mail->SMTPSecure = "ssl";         
+    $mail->Host = $config['SMTP_HOST'];
+    $mail->Port = $config['SMTP_PORT'];
+    $mail->Username = $config['SMTP_USER'];
+    $mail->Password = $config['SMTP_PASS'];
+
+    $mail->CharSet = 'utf-8';
+    
+    $mail->setFrom($config['FROM_EMAIL'], $config['FROM_NAME']);
+    $replyEmail = $config['REPLY_EMAIL'] ? $config['REPLY_EMAIL'] :$config['FROM_EMAIL'];
+    $replayName = $config['REPLY_NAME'] ? $config['REPLY_NAME'] : $config['FROM_NAME'];
+    $mail->addReplyTo($replyEmail, $replayName);
+
+    $mail->addAddress($email);
+
+    $mail->Subject = $subject;
+    $mail->isHTML(true);
+    $mail->msgHTML($content);
+
+    return $mail->send() ? true : $mail->ErrorInfo;
 }
 
 function get_lang() {
