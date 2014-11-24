@@ -155,7 +155,7 @@ $(document).ready(function(){
                 "img_width": "128",
                 "img_height": "128",
                 "link": "http://www.voluncation.com/",
-                "desc":  "让你的身体和心灵都在路上!",
+                "desc":  "让身体和心灵同时在路上!",
                 "title": "旅心Voluncation"
             }, function (res) {
                 _report('send_msg', res.err_msg);
@@ -169,7 +169,7 @@ $(document).ready(function(){
                 "img_width": "128",
                 "img_height": "128",
                 "link": "http://www.voluncation.com/",
-                "desc":  "让你的身体和心灵都在路上!",
+                "desc":  "让身体和心灵同时在路上!",
                 "title": "旅心Voluncation"
             }, function (res) {
                 _report('timeline', res.err_msg);

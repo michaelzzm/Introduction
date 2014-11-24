@@ -28,7 +28,7 @@
                 <!--<img src="upload/iphone.png" height="532" width="252" alt="" class="header-img">-->
                 <div class="header-wrapper">
                     <h1>旅心<span>Voluncation</span></h1>
-                    <p>旅心，让身体和心灵同时在路上！<br/><br/>无论你是否听说或参加过<span class="highlight"><a class="highlight" href="http://baike.baidu.com/view/6719850.htm">公益旅行</a></span>，只要你乐于<span class="highlight">分享奉献</span>，敢于<span class="highlight">闯荡世界</span>，那么就来旅心Voluncation寻找适合你的旅行项目吧！</p>
+                    <p>旅心，让身体和心灵同时在路上！<br/><br/>无论你是否听说或参加过<span class="highlight">公益旅行</span>，只要你乐于<span class="highlight">分享奉献</span>，敢于<span class="highlight">闯荡世界</span>，那么就来旅心Voluncation寻找适合你的旅行项目吧！</p>
                     <div class="buttons-wrapper">
                         <a href="#subscribe" class="button">订阅消息</a>
                         <a href="#favorite" class="button button-stripe">告诉我们你最想去哪？</a>
@@ -45,7 +45,7 @@
                     <div class="video-subtitle">目前我们的网站正在建设中，希望在2015新年伊始之际与您见面！<br/>
                     关注公益旅行的小伙伴可以立即<a href="#subscribe">订阅</a>我们的最新消息！<br/>
                     希望把现有项目发布在我们平台的组织或个人也可以和我们<a href="#favorite">取得联系</a>！<br/>
-                    <span style="color:#000">Volunteer+Vacation</span>,让身体和心灵同时在路上！</div>
+                    <span class="highlight" style="font-weight:normal!important">Volunteer+Vacation</span>,让身体和心灵同时在路上！</div>
                     <div class="video-block">
                     </div>
                     <div class="video-share-wrapper clearfix">

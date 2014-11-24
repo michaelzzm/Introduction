@@ -45,7 +45,7 @@
                     <div class="video-subtitle">Our site is currently under construction. We will be available to you in the first quarter of 2015!<br/>
                     <a href="#subscribe">Subscribe</a> our newsletter and stay tuned with us!<br/>
                     If you want to post your own programs and search for qualified volunteers, please don't hesitate to <a href="#favorite">Contact</a> Us！<br/>
-                    <span style="color:#000">Volunteer+Vacation</span>, Experience your very vacation</div>
+                    <span class="highlight" style="font-weight:normal!important">Volunteer+Vacation</span>, Experience your very vacation</div>
                     <div class="video-block">
                     </div>
                     <div class="video-share-wrapper clearfix">
